@@ -1,1 +1,287 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ethik-Labor: Dashboard</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
 
+        .container { max-width: 1200px; margin: 0 auto; }
+
+        header {
+            background: white;
+            border-radius: 20px;
+            padding: 30px 40px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .header-left h1 { color: #667eea; font-size: 2em; margin-bottom: 5px; }
+        .header-left p { color: #666; }
+
+        .username-badge {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 20px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .user-stats { color: #666; font-size: 0.9em; }
+
+        .logout-btn {
+            background: white;
+            border: 2px solid #667eea;
+            color: #667eea;
+            padding: 8px 20px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 0.9em;
+            margin-top: 10px;
+            transition: all 0.3s;
+        }
+
+        .logout-btn:hover { background: #f0f3ff; }
+
+        .content {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+
+        h2 { color: #333; margin-bottom: 10px; }
+
+        .intro {
+            color: #666;
+            margin-bottom: 30px;
+            line-height: 1.6;
+        }
+
+        .dilemma-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 25px;
+            margin: 30px 0;
+        }
+
+        .dilemma-card {
+            background: #f8f9fa;
+            border: 3px solid #e0e0e0;
+            border-radius: 15px;
+            padding: 30px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .dilemma-card:hover:not(.locked) {
+            border-color: #667eea;
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);
+        }
+
+        .dilemma-card.locked { opacity: 0.6; cursor: not-allowed; }
+        
+        .dilemma-card.completed {
+            border-color: #4caf50;
+            background: linear-gradient(135deg, #f0fff4 0%, #e8f5e9 100%);
+        }
+
+        .dilemma-icon { font-size: 3.5em; margin-bottom: 15px; }
+        .dilemma-title { font-size: 1.4em; font-weight: bold; color: #333; margin-bottom: 12px; }
+        .dilemma-description { color: #666; font-size: 0.95em; line-height: 1.6; margin-bottom: 15px; }
+
+        .dilemma-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 20px;
+            padding-top: 15px;
+            border-top: 2px solid #e0e0e0;
+        }
+
+        .badge {
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 0.85em;
+            font-weight: bold;
+        }
+
+        .badge.available { background: #4caf50; color: white; }
+        .badge.completed { background: #2196f3; color: white; }
+        .badge.locked { background: #999; color: white; }
+
+        .stats-box {
+            background: #f0f3ff;
+            border-radius: 12px;
+            padding: 25px;
+            margin-bottom: 30px;
+            display: flex;
+            gap: 30px;
+        }
+
+        .stat { flex: 1; text-align: center; }
+        .stat-number { font-size: 2.5em; font-weight: bold; color: #667eea; }
+        .stat-label { color: #666; margin-top: 5px; }
+
+        @media (max-width: 768px) {
+            header { flex-direction: column; text-align: center; }
+            .user-info { margin-top: 20px; text-align: center; }
+            .dilemma-grid { grid-template-columns: 1fr; }
+            .stats-box { flex-direction: column; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="header-left">
+                <h1>🎓 Ethik-Labor</h1>
+                <p>Willkommen zurück!</p>
+            </div>
+            <div class="user-info">
+                <div class="username-badge" id="username"></div>
+                <div class="user-stats" id="user-stats"></div>
+                <button class="logout-btn" onclick="handleLogout()">🚪 Abmelden</button>
+            </div>
+        </header>
+
+        <div class="content">
+            <h2>Wähle ein ethisches Dilemma</h2>
+            <p class="intro">
+                Jedes Dilemma präsentiert eine schwierige Entscheidung ohne eindeutig "richtige" Antwort.
+            </p>
+
+            <div class="stats-box">
+                <div class="stat">
+                    <div class="stat-number" id="completed-count">0</div>
+                    <div class="stat-label">Abgeschlossen</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-number" id="available-count">1</div>
+                    <div class="stat-label">Verfügbar</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-number" id="total-count">5</div>
+                    <div class="stat-label">Geplant</div>
+                </div>
+            </div>
+
+            <div class="dilemma-grid" id="dilemma-grid"></div>
+
+            <div style="margin-top: 40px; padding: 20px; background: #f8f9fa; border-radius: 12px; text-align: center;">
+                <p style="color: #666;">📊 Möchtest du sehen, was andere entschieden haben?</p>
+                <button class="logout-btn" style="margin-top: 15px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; border: none;" onclick="window.location.href='statistics.html'">
+                    Zu den Statistiken →
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script type="module">
+        import { getCurrentUser, isUserLoggedIn, isDilemmaCompleted, logout } from './user.js';
+
+        if (!isUserLoggedIn()) window.location.href = 'index.html';
+
+        const user = getCurrentUser();
+        document.getElementById('username').textContent = user.username;
+        document.getElementById('user-stats').textContent = `${user.totalDecisions} Entscheidung${user.totalDecisions !== 1 ? 'en' : ''}`;
+        document.getElementById('completed-count').textContent = user.completedDilemmas.length;
+
+        const dilemmas = [
+            {
+                id: 'migration',
+                icon: '🌍',
+                title: 'Zwischen Welten',
+                description: 'Famil
+
+ienrestaurant oder Traumkarriere? Kulturelle Identität vs. persönliche Freiheit.',
+                url: 'migration.html',
+                available: true,
+                time: '~10 Min'
+            },
+            {
+                id: 'environment',
+                icon: '🌱',
+                title: 'Konsum & Klima',
+                description: 'Konsumgesellschaft während der Klimakrise: Komfort vs. ökologische Verantwortung.',
+                url: '#',
+                available: false,
+                time: '~10 Min'
+            },
+            {
+                id: 'gender',
+                icon: '⚧️',
+                title: 'Geschlechterrollen',
+                description: 'Traditionelle Erwartungen vs. moderne Identität im Wandel.',
+                url: '#',
+                available: false,
+                time: '~10 Min'
+            },
+            {
+                id: 'technology',
+                icon: '🤖',
+                title: 'KI & Verantwortung',
+                description: 'Künstliche Intelligenz: Innovation vs. ethische Bedenken.',
+                url: '#',
+                available: false,
+                time: '~10 Min'
+            },
+            {
+                id: 'healthcare',
+                icon: '⚕️',
+                title: 'Medizin & Ressourcen',
+                description: 'Knappe Ressourcen im Gesundheitswesen: Wer erhält Behandlung?',
+                url: '#',
+                available: false,
+                time: '~10 Min'
+            }
+        ];
+
+        const grid = document.getElementById('dilemma-grid');
+        
+        dilemmas.forEach(dilemma => {
+            const completed = isDilemmaCompleted(dilemma.id);
+            const isLocked = !dilemma.available && !completed;
+            
+            const card = document.createElement('div');
+            card.className = `dilemma-card ${completed ? 'completed' : ''} ${isLocked ? 'locked' : ''}`;
+            
+            card.innerHTML = `
+                <div class="dilemma-icon">${dilemma.icon}</div>
+                <div class="dilemma-title">${dilemma.title}</div>
+                <div class="dilemma-description">${dilemma.description}</div>
+                <div class="dilemma-meta">
+                    <span class="badge ${completed ? 'completed' : (dilemma.available ? 'available' : 'locked')}">
+                        ${completed ? '✓ Abgeschlossen' : (dilemma.available ? 'Verfügbar' : '🔒 Bald')}
+                    </span>
+                    <span style="color: #999; font-size: 0.85em;">⏱️ ${dilemma.time}</span>
+                </div>
+            `;
+            
+            if (dilemma.available) {
+                card.onclick = () => window.location.href = dilemma.url;
+            }
+            
+            grid.appendChild(card);
+        });
+
+        window.handleLogout = () => {
+            if (confirm('Möchtest du dich wirklich abmelden?')) logout();
+        };
+    </script>
+</body>
+</html>
