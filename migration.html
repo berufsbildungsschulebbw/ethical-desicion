@@ -1,1 +1,835 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zwischen Welten - Ethik-Labor</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
 
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+
+        header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px 40px;
+            position: relative;
+        }
+
+        .back-button {
+            position: absolute;
+            top: 30px;
+            left: 40px;
+            background: rgba(255,255,255,0.2);
+            border: none;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 0.9em;
+            transition: all 0.3s;
+        }
+
+        .back-button:hover {
+            background: rgba(255,255,255,0.3);
+        }
+
+        .user-badge {
+            position: absolute;
+            top: 30px;
+            right: 40px;
+            background: rgba(255,255,255,0.2);
+            padding: 10px 20px;
+            border-radius: 20px;
+            font-size: 0.9em;
+        }
+
+        h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+
+        .subtitle {
+            font-size: 1.2em;
+            opacity: 0.9;
+            text-align: center;
+        }
+
+        .content {
+            padding: 40px;
+        }
+
+        .page {
+            display: none;
+        }
+
+        .page.active {
+            display: block;
+            animation: fadeIn 0.5s;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .intro-text {
+            font-size: 1.1em;
+            line-height: 1.8;
+            margin-bottom: 30px;
+        }
+
+        .info-box {
+            background: #f8f9fa;
+            border-left: 4px solid #667eea;
+            padding: 25px;
+            margin: 30px 0;
+            border-radius: 8px;
+        }
+
+        .info-box h3 {
+            color: #667eea;
+            margin-bottom: 15px;
+        }
+
+        .persona-card {
+            background: linear-gradient(135deg, #f6f9ff 0%, #f0f3ff 100%);
+            border: 3px solid #667eea;
+            border-radius: 15px;
+            padding: 30px;
+            margin: 30px 0;
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.2);
+        }
+
+        .persona-header {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+
+        .persona-avatar {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5em;
+            color: white;
+        }
+
+        .persona-name h2 {
+            color: #667eea;
+            margin-bottom: 5px;
+        }
+
+        .persona-name .age {
+            color: #666;
+            font-size: 0.95em;
+        }
+
+        .persona-details {
+            display: grid;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .persona-detail {
+            display: flex;
+            align-items: start;
+            gap: 10px;
+        }
+
+        .persona-detail-icon {
+            font-size: 1.3em;
+            min-width: 30px;
+        }
+
+        .scenario-box {
+            background: #f8f9fa;
+            border-left: 4px solid #667eea;
+            padding: 25px;
+            margin: 30px 0;
+            border-radius: 8px;
+        }
+
+        .scenario-box h3 {
+            color: #667eea;
+            margin-bottom: 15px;
+        }
+
+        .options {
+            display: grid;
+            gap: 15px;
+            margin: 30px 0;
+        }
+
+        .option-card {
+            background: #f8f9fa;
+            border: 2px solid #e0e0e0;
+            border-radius: 12px;
+            padding: 20px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .option-card:hover {
+            border-color: #667eea;
+            transform: translateX(5px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.2);
+        }
+
+        .option-card.selected {
+            border-color: #667eea;
+            background: #f0f3ff;
+        }
+
+        .option-title {
+            font-weight: bold;
+            font-size: 1.2em;
+            color: #667eea;
+            margin-bottom: 10px;
+        }
+
+        .option-description {
+            color: #666;
+            font-size: 0.95em;
+        }
+
+        .ethics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin: 30px 0;
+        }
+
+        .ethics-button {
+            background: white;
+            border: 2px solid #667eea;
+            color: #667eea;
+            padding: 15px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s;
+            text-align: center;
+        }
+
+        .ethics-button:hover {
+            background: #667eea;
+            color: white;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3);
+        }
+
+        .ethics-button.clicked {
+            background: #e8ecff;
+            border-color: #4c5fd5;
+        }
+
+        .button {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 15px 40px;
+            border-radius: 30px;
+            font-size: 1.1em;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: inline-block;
+            margin-top: 20px;
+        }
+
+        .button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.4);
+        }
+
+        .button:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.7);
+            z-index: 1000;
+            padding: 20px;
+            overflow-y: auto;
+        }
+
+        .modal.active {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-content {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            max-width: 600px;
+            max-height: 90vh;
+            overflow-y: auto;
+            position: relative;
+            animation: slideUp 0.4s;
+        }
+
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(50px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            font-size: 30px;
+            cursor: pointer;
+            color: #999;
+            background: none;
+            border: none;
+        }
+
+        .close-modal:hover {
+            color: #333;
+        }
+
+        .result-box {
+            background: #f0f3ff;
+            border-radius: 12px;
+            padding: 25px;
+            margin: 20px 0;
+        }
+
+        .result-box h3 {
+            color: #667eea;
+            margin-bottom: 15px;
+        }
+
+        .framework-support {
+            display: grid;
+            gap: 10px;
+            margin: 20px 0;
+        }
+
+        .framework-item {
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            border-left: 4px solid #ccc;
+        }
+
+        .framework-item.strong {
+            border-left-color: #4caf50;
+        }
+
+        .framework-item.moderate {
+            border-left-color: #ff9800;
+        }
+
+        .framework-item.weak {
+            border-left-color: #f44336;
+        }
+
+        .consequences {
+            margin: 20px 0;
+            padding: 20px;
+            background: #fff3cd;
+            border-radius: 8px;
+            border-left: 4px solid #ffc107;
+        }
+
+        .highlight {
+            background: #fff3cd;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-weight: 500;
+        }
+
+        @media (max-width: 768px) {
+            h1 { font-size: 1.8em; }
+            .content { padding: 20px; }
+            header { padding: 80px 20px 30px 20px; }
+            .back-button { top: 20px; left: 20px; }
+            .user-badge { top: 20px; right: 20px; font-size: 0.8em; }
+            .persona-header { flex-direction: column; text-align: center; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <button class="back-button" onclick="window.location.href='dashboard.html'">
+                <i class="fas fa-arrow-left"></i> Dashboard
+            </button>
+            <div class="user-badge" id="username-display"></div>
+            <h1>Zwischen Welten</h1>
+            <p class="subtitle">Ein ethisches Dilemma zu kultureller Identität</p>
+        </header>
+
+        <div class="content">
+            <!-- Page 1: Persona Introduction -->
+            <div class="page active" id="page-persona">
+                <h2>Deine Rolle in diesem Dilemma</h2>
+                
+                <p style="margin-bottom: 20px;">Du wurdest zufällig dieser Person zugewiesen. Versetze dich in ihre Situation:</p>
+
+                <div class="persona-card" id="persona-display"></div>
+
+                <div class="info-box">
+                    <h3>💭 Deine Aufgabe</h3>
+                    <p>Versuche, aus der Perspektive dieser Person zu entscheiden. Welche Werte, Hoffnungen und Verpflichtungen könnten ihre Entscheidung beeinflussen?</p>
+                </div>
+
+                <button class="button" onclick="goToPage('page-dilemma')">Zum Dilemma →</button>
+            </div>
+
+            <!-- Page 2: Dilemma -->
+            <div class="page" id="page-dilemma">
+                <h2>Das Dilemma</h2>
+                
+                <div class="scenario-box">
+                    <h3>Die Situation</h3>
+                    <div id="dilemma-text"></div>
+                </div>
+
+                <h3 style="margin-top: 30px;">🤔 Ethische Perspektiven</h3>
+                <p style="margin-bottom: 15px;">Bevor du entscheidest, kannst du dich über verschiedene ethische Theorien informieren:</p>
+                
+                <div class="ethics-grid">
+                    <button class="ethics-button" onclick="showEthicsModal('utilitarismus')">
+                        ⚖️ Utilitarismus
+                    </button>
+                    <button class="ethics-button" onclick="showEthicsModal('deontologie')">
+                        📜 Deontologie
+                    </button>
+                    <button class="ethics-button" onclick="showEthicsModal('tugendethik')">
+                        💎 Tugendethik
+                    </button>
+                    <button class="ethics-button" onclick="showEthicsModal('kommunitarismus')">
+                        🤝 Kommunitarismus
+                    </button>
+                </div>
+
+                <h3 style="margin-top: 30px;">Deine Entscheidung</h3>
+                <p style="margin-bottom: 15px;">Was entscheidet <span class="highlight" id="persona-name-reminder"></span>?</p>
+
+                <div class="options">
+                    <div class="option-card" onclick="selectOption(1)">
+                        <div class="option-title">1. Das Restaurant übernehmen</div>
+                        <div class="option-description">Du sagst die Stelle ab und übernimmst das Familienrestaurant. Du opferst deine Karriere für die Familie und die Community.</div>
+                    </div>
+
+                    <div class="option-card" onclick="selectOption(2)">
+                        <div class="option-title">2. Die Stelle annehmen</div>
+                        <div class="option-description">Du nimmst die Traumstelle an. Deine Eltern müssen das Restaurant verkaufen oder schließen. Du priorisierst deine persönliche Entfaltung.</div>
+                    </div>
+
+                    <div class="option-card" onclick="selectOption(3)">
+                        <div class="option-title">3. Kompromiss: Hybridmodell</div>
+                        <div class="option-description">Du versuchst beides: Restaurant in eine GmbH umwandeln, einen Manager einstellen, selbst in Teilzeit managen und parallel in deinem Beruf arbeiten.</div>
+                    </div>
+
+                    <div class="option-card" onclick="selectOption(4)">
+                        <div class="option-title">4. Übergangsphase vereinbaren</div>
+                        <div class="option-description">Du übernimmst das Restaurant für 2-3 Jahre, um einen Nachfolger zu finden. Danach wechselst du in deinen Beruf.</div>
+                    </div>
+
+                    <div class="option-card" onclick="selectOption(5)">
+                        <div class="option-title">5. Familiengespräch & gemeinsame Lösung</div>
+                        <div class="option-description">Du initiierst ein Familiengespräch mit allen Beteiligten, um gemeinsam nach kreativen Lösungen zu suchen.</div>
+                    </div>
+                </div>
+
+                <button class="button" id="submit-decision" onclick="submitDecision()" disabled>Entscheidung bestätigen →</button>
+            </div>
+
+            <!-- Page 3: Results -->
+            <div class="page" id="page-results">
+                <h2>Deine Entscheidung</h2>
+                
+                <div class="result-box" id="your-choice"></div>
+
+                <div class="consequences" id="consequences"></div>
+
+                <h3 style="margin-top: 30px;">Welche ethischen Theorien unterstützen deine Entscheidung?</h3>
+                <div class="framework-support" id="framework-support"></div>
+
+                <div style="display: flex; gap: 15px; margin-top: 30px;">
+                    <button class="button" onclick="window.location.href='dashboard.html'">← Zurück zum Dashboard</button>
+                    <button class="button" style="background: white; color: #667eea; border: 2px solid #667eea;" onclick="window.location.href='statistics.html'">
+                        📊 Statistiken ansehen
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal for Ethics Explanations -->
+    <div class="modal" id="ethics-modal">
+        <div class="modal-content">
+            <button class="close-modal" onclick="closeModal()">×</button>
+            <div id="modal-body"></div>
+        </div>
+    </div>
+
+    <script type="module">
+        import { db } from './config.js';
+        import { collection, addDoc } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js';
+        import { getCurrentUser, isUserLoggedIn, markDilemmaCompleted } from './user.js';
+
+        // Check login
+        if (!isUserLoggedIn()) {
+            window.location.href = 'index.html';
+        }
+
+        const user = getCurrentUser();
+        document.getElementById('username-display').textContent = user.username;
+
+        // Personas
+        const personas = [
+            {
+                id: 'leyla',
+                name: 'Leyla',
+                age: 26,
+                gender: 'weiblich',
+                avatar: '👩🏻',
+                profession: 'Architektin',
+                background: 'Geboren in Deutschland, Eltern aus der Türkei',
+                education: 'Master in Architektur, TU Berlin',
+                jobOffer: 'Renommiertes Architekturbüro in Hamburg',
+                family: 'Vater (krank), Mutter, jüngere Schwester (Medizinstudentin)',
+                personality: 'Kreativ, pflichtbewusst, zwischen Tradition und Moderne',
+                dream: 'Nachhaltige Stadtentwicklung, Brücken zwischen Kulturen bauen'
+            },
+            {
+                id: 'cem',
+                name: 'Cem',
+                age: 28,
+                gender: 'männlich',
+                avatar: '👨🏻',
+                profession: 'Software-Ingenieur',
+                background: 'In Deutschland aufgewachsen, kurdische Wurzeln',
+                education: 'Bachelor & Master Informatik, TU München',
+                jobOffer: 'Startup in Berlin mit Führungsposition',
+                family: 'Vater (krank), Mutter, jüngere Schwester (BWL-Studium)',
+                personality: 'Analytisch, familiär orientiert, sucht optimale Lösungen',
+                dream: 'Technologie für soziale Gerechtigkeit einsetzen'
+            },
+            {
+                id: 'aylin',
+                name: 'Aylin',
+                age: 25,
+                gender: 'weiblich',
+                avatar: '👩🏽',
+                profession: 'Grafikdesignerin',
+                background: 'Zweite Generation, türkisch-deutsche Identität',
+                education: 'Design-Studium, HfG Offenbach',
+                jobOffer: 'Kreativagentur in Frankfurt, Art Director',
+                family: 'Vater (krank), Mutter, jüngerer Bruder (Ausbildung)',
+                personality: 'Künstlerisch, empathisch, sucht Harmonie',
+                dream: 'Kulturelle Vielfalt durch Design sichtbar machen'
+            },
+            {
+                id: 'mehmet',
+                name: 'Mehmet',
+                age: 27,
+                gender: 'männlich',
+                avatar: '👨🏽',
+                profession: 'Maschinenbauingenieur',
+                background: 'In Stuttgart geboren, türkische Familie',
+                education: 'Maschinenbau, Universität Stuttgart',
+                jobOffer: 'Automobilkonzern in München, Entwicklung',
+                family: 'Vater (krank), Mutter, jüngere Schwester (Lehramt)',
+                personality: 'Praktisch, loyal, pragmatischer Problemlöser',
+                dream: 'Elektromobilität voranbringen'
+            },
+            {
+                id: 'zeynep',
+                name: 'Zeynep',
+                age: 26,
+                gender: 'weiblich',
+                avatar: '👩🏽‍🦱',
+                profession: 'Psychologin',
+                background: 'In Köln aufgewachsen, türkisch-arabische Wurzeln',
+                education: 'Psychologie, Universität Köln',
+                jobOffer: 'Klinik in Düsseldorf, Traumatherapie',
+                family: 'Vater (krank), Mutter, älterer Bruder (im Restaurant)',
+                personality: 'Reflektiert, einfühlsam, ringt mit Erwartungen',
+                dream: 'Menschen mit Migrationserfahrung unterstützen'
+            }
+        ];
+
+        // Global state
+        window.appState = {
+            persona: personas[Math.floor(Math.random() * personas.length)],
+            selectedOption: null,
+            startTime: Date.now(),
+            decisionTime: null,
+            ethicsButtonsClicked: [],
+            sessionId: 'session_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9)
+        };
+
+        // Display persona
+        displayPersona();
+
+        function displayPersona() {
+            const persona = window.appState.persona;
+            document.getElementById('persona-display').innerHTML = `
+                <div class="persona-header">
+                    <div class="persona-avatar">${persona.avatar}</div>
+                    <div class="persona-name">
+                        <h2>${persona.name}</h2>
+                        <div class="age">${persona.age} Jahre, ${persona.gender}</div>
+                    </div>
+                </div>
+                <div class="persona-details">
+                    <div class="persona-detail">
+                        <div class="persona-detail-icon">💼</div>
+                        <div><strong>Beruf:</strong> ${persona.profession}</div>
+                    </div>
+                    <div class="persona-detail">
+                        <div class="persona-detail-icon">🎓</div>
+                        <div><strong>Ausbildung:</strong> ${persona.education}</div>
+                    </div>
+                    <div class="persona-detail">
+                        <div class="persona-detail-icon">🌍</div>
+                        <div><strong>Hintergrund:</strong> ${persona.background}</div>
+                    </div>
+                    <div class="persona-detail">
+                        <div class="persona-detail-icon">👨‍👩‍👧</div>
+                        <div><strong>Familie:</strong> ${persona.family}</div>
+                    </div>
+                    <div class="persona-detail">
+                        <div class="persona-detail-icon">✨</div>
+                        <div><strong>Angebot:</strong> ${persona.jobOffer}</div>
+                    </div>
+                    <div class="persona-detail">
+                        <div class="persona-detail-icon">💭</div>
+                        <div><strong>Charakter:</strong> ${persona.personality}</div>
+                    </div>
+                    <div class="persona-detail">
+                        <div class="persona-detail-icon">🎯</div>
+                        <div><strong>Traum:</strong> ${persona.dream}</div>
+                    </div>
+                </div>
+            `;
+
+            document.getElementById('dilemma-text').innerHTML = `
+                <p>Du bist <strong>${persona.name}</strong>, ${persona.age} Jahre alt, in Deutschland geboren und aufgewachsen. Deine Eltern haben mit harter Arbeit ein erfolgreiches Restaurant aufgebaut. Das Restaurant ist mehr als nur ein Geschäft – es ist zum Treffpunkt für die Community geworden, ein Stück Heimat in der Fremde.</p>
+                
+                <p style="margin-top: 15px;">Du hast gerade dein Studium (${persona.profession}) mit Auszeichnung abgeschlossen. ${persona.jobOffer} hat dir eine Stelle angeboten – deine Traumposition. Gleichzeitig ist dein Vater krank geworden. Die Ärzte sagen, er muss kürzertreten.</p>
+                
+                <p style="margin-top: 15px;">Deine Eltern erwarten, dass du das Restaurant übernimmst. "Das haben wir alles für euch aufgebaut", sagt deine Mutter. "Das ist nicht nur unser Geschäft – das ist unser Erbe, unsere Identität, unsere Community."</p>
+                
+                <p style="margin-top: 15px;">Deine Geschwister können nicht einspringen. Wenn du ablehnst, müssen deine Eltern das Restaurant wahrscheinlich verkaufen oder schließen. Die Community würde einen wichtigen Ort verlieren. Deine Familie wäre tief enttäuscht.</p>
+                
+                <p style="margin-top: 15px;"><strong>Was entscheidest du?</strong></p>
+            `;
+
+            document.getElementById('persona-name-reminder').textContent = persona.name;
+        }
+
+        // Ethics content (shortened for space)
+        window.ethicsContent = {
+            utilitarismus: {
+                title: "Utilitarismus: Das größte Glück für die größte Zahl",
+                content: `<h3>Kernprinzip</h3><p>Handlungen sind richtig, wenn sie das größte Glück für die größte Anzahl erzeugen.</p>
+                <h3>Im Dilemma</h3><p>Berechne: Dein Glück, Familie, Community (50+ Personen), Gesellschaft.</p>
+                <p><strong>Empfehlung:</strong> Option 3 (Hybrid) oder Option 5 (Familiengespräch)</p>`
+            },
+            deontologie: {
+                title: "Deontologie: Pflicht und Prinzipien",
+                content: `<h3>Kernprinzip</h3><p>Handlungen folgen moralischen Pflichten, nicht Konsequenzen.</p>
+                <h3>Im Dilemma</h3><p>Pflicht zu Eltern, zu dir selbst, zur Wahrhaftigkeit.</p>
+                <p><strong>Empfehlung:</strong> Option 5 (Familiengespräch) oder Option 2 (Stelle)</p>`
+            },
+            tugendethik: {
+                title: "Tugendethik: Charakter zählt",
+                content: `<h3>Kernprinzip</h3><p>Was würde ein guter Mensch tun? Kultiviere Tugenden.</p>
+                <h3>Im Dilemma</h3><p>Dankbarkeit, Mut, praktische Weisheit, Balance.</p>
+                <p><strong>Empfehlung:</strong> Option 4 (Übergang) oder Option 3 (Hybrid)</p>`
+            },
+            kommunitarismus: {
+                title: "Kommunitarismus: Gemeinschaft & Tradition",
+                content: `<h3>Kernprinzip</h3><p>Identität entsteht aus Gemeinschaft, nicht individuell.</p>
+                <h3>Im Dilemma</h3><p>Restaurant ist gemeinsames Gut, narrative Kontinuität.</p>
+                <p><strong>Empfehlung:</strong> Option 1 (Restaurant) oder Option 5 (Gespräch)</p>`
+            }
+        };
+
+        // Option details
+        window.optionDetails = {
+            1: {
+                title: "Das Restaurant übernehmen",
+                consequences: "Du gibst deine Karriere auf. Familie erleichtert, Community behält Treffpunkt. Langfristig: Mögliche Frustration oder Erfüllung im Familienunternehmen.",
+                frameworks: { utilitarismus: "moderate", deontologie: "strong", tugendethik: "moderate", kommunitarismus: "strong" }
+            },
+            2: {
+                title: "Die Stelle annehmen",
+                consequences: "Traumverwirklichung, aber Familie tief enttäuscht. Restaurant wird verkauft, Community verliert Treffpunkt. Du trägst psychische Last.",
+                frameworks: { utilitarismus: "weak", deontologie: "moderate", tugendethik: "weak", kommunitarismus: "weak" }
+            },
+            3: {
+                title: "Kompromiss: Hybridmodell",
+                consequences: "Ambitioniert! Risiko: Überforderung, beide Bereiche leiden. Vorteil: Beide Optionen offen, zeigt Flexibilität.",
+                frameworks: { utilitarismus: "strong", deontologie: "moderate", tugendethik: "strong", kommunitarismus: "moderate" }
+            },
+            4: {
+                title: "Übergangsphase vereinbaren",
+                consequences: "Verantwortung & Loyalität. Familie bekommt Zeit. Traumstelle weg, aber andere Möglichkeiten. 2-3 Jahre Opfer, dann Weg frei.",
+                frameworks: { utilitarismus: "strong", deontologie: "strong", tugendethik: "strong", kommunitarismus: "moderate" }
+            },
+            5: {
+                title: "Familiengespräch & gemeinsame Lösung",
+                consequences: "Demokratisch! Kann zu kreativen Lösungen führen. Entscheidung von allen getragen. Risiko: Konfliktreich, Kompromisse nötig.",
+                frameworks: { utilitarismus: "moderate", deontologie: "strong", tugendethik: "strong", kommunitarismus: "strong" }
+            }
+        };
+
+        window.frameworkInfo = {
+            utilitarismus: { name: "Utilitarismus", icon: "⚖️" },
+            deontologie: { name: "Deontologie", icon: "📜" },
+            tugendethik: { name: "Tugendethik", icon: "💎" },
+            kommunitarismus: { name: "Kommunitarismus", icon: "🤝" }
+        };
+
+        window.supportLevels = {
+            strong: { text: "Stark unterstützt", color: "#4caf50" },
+            moderate: { text: "Moderat unterstützt", color: "#ff9800" },
+            weak: { text: "Schwach unterstützt", color: "#f44336" }
+        };
+
+        // Navigation
+        window.goToPage = function(pageId) {
+            document.querySelectorAll('.page').forEach(page => page.classList.remove('active'));
+            document.getElementById(pageId).classList.add('active');
+            window.scrollTo(0, 0);
+        };
+
+        // Option selection
+        window.selectOption = function(optionNum) {
+            document.querySelectorAll('.option-card').forEach(card => card.classList.remove('selected'));
+            event.currentTarget.classList.add('selected');
+            window.appState.selectedOption = optionNum;
+            document.getElementById('submit-decision').disabled = false;
+        };
+
+        // Show ethics modal
+        window.showEthicsModal = function(ethicsType) {
+            const modal = document.getElementById('ethics-modal');
+            const modalBody = document.getElementById('modal-body');
+            const content = window.ethicsContent[ethicsType];
+            
+            modalBody.innerHTML = `<h2>${content.title}</h2>${content.content}`;
+            modal.classList.add('active');
+            
+            if (!window.appState.ethicsButtonsClicked.includes(ethicsType)) {
+                window.appState.ethicsButtonsClicked.push(ethicsType);
+            }
+            event.currentTarget.classList.add('clicked');
+        };
+
+        window.closeModal = function() {
+            document.getElementById('ethics-modal').classList.remove('active');
+        };
+
+        // Submit decision
+        window.submitDecision = async function() {
+            if (!window.appState.selectedOption) return;
+            
+            window.appState.decisionTime = Date.now() - window.appState.startTime;
+            
+            // Save to Firebase
+            if (db) {
+                try {
+                    await addDoc(collection(db, "decisions"), {
+                        sessionId: window.appState.sessionId,
+                        username: user.username,
+                        dilemmaId: 'migration',
+                        personaId: window.appState.persona.id,
+                        personaName: window.appState.persona.name,
+                        selectedOption: window.appState.selectedOption,
+                        decisionTime: window.appState.decisionTime,
+                        ethicsButtonsClicked: window.appState.ethicsButtonsClicked,
+                        timestamp: new Date().toISOString()
+                    });
+                    console.log("✅ Decision saved");
+                } catch (error) {
+                    console.error("❌ Error saving:", error);
+                }
+            }
+
+            // Mark dilemma as completed
+            await markDilemmaCompleted('migration');
+            
+            showResults();
+            goToPage('page-results');
+        };
+
+        // Show results
+        function showResults() {
+            const option = window.appState.selectedOption;
+            const details = window.optionDetails[option];
+            const persona = window.appState.persona;
+            
+            document.getElementById('your-choice').innerHTML = `
+                <h3>${persona.name} hat gewählt:</h3>
+                <p style="font-size: 1.2em; font-weight: bold; color: #667eea; margin-top: 10px;">
+                    ${details.title}
+                </p>
+            `;
+            
+            document.getElementById('consequences').innerHTML = `
+                <h3>⚠️ Mögliche Konsequenzen</h3>
+                <p style="margin-top: 10px;">${details.consequences}</p>
+            `;
+            
+            let frameworkHTML = '';
+            for (const [framework, support] of Object.entries(details.frameworks)) {
+                const info = window.frameworkInfo[framework];
+                const supportInfo = window.supportLevels[support];
+                
+                frameworkHTML += `
+                    <div class="framework-item ${support}">
+                        <strong>${info.icon} ${info.name}:</strong> 
+                        <span style="color: ${supportInfo.color}">${supportInfo.text}</span>
+                    </div>
+                `;
+            }
+            document.getElementById('framework-support').innerHTML = frameworkHTML;
+        }
+
+        // Close modal on background click
+        document.getElementById('ethics-modal').addEventListener('click', function(e) {
+            if (e.target === this) closeModal();
+        });
+    </script>
+</body>
+</html>
