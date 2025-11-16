@@ -16,123 +16,173 @@
 
         .container { max-width: 1000px; margin: 0 auto; }
 
-        .back-link {
-            display: inline-block;
-            color: white;
-            text-decoration: none;
-            padding: 10px 20px;
-            background: rgba(255,255,255,0.2);
+        header {
+            background: white;
             border-radius: 20px;
-            margin-bottom: 20px;
-            transition: all 0.3s;
+            padding: 25px 35px;
+            margin-bottom: 25px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
         }
 
-        .back-link:hover { background: rgba(255,255,255,0.3); }
+        .header-left { flex: 1; }
+        .header-left h1 { color: #667eea; font-size: 1.8em; margin-bottom: 5px; }
+        .header-left p { color: #666; font-size: 0.95em; }
 
-        .card {
+        .back-btn {
+            background: white;
+            border: 2px solid #667eea;
+            color: #667eea;
+            padding: 10px 25px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 0.95em;
+            transition: all 0.3s;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .back-btn:hover { background: #f0f3ff; }
+
+        .content {
             background: white;
             border-radius: 20px;
             padding: 40px;
-            margin-bottom: 20px;
             box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            margin-bottom: 25px;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 8px;
+            background: #e0e0e0;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            width: 0%;
+            transition: width 0.5s ease;
+        }
+
+        .step { display: none; }
+        .step.active { display: block; animation: fadeIn 0.5s; }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        h2 { color: #333; font-size: 2em; margin-bottom: 15px; }
+        .subtitle { color: #666; font-size: 1.1em; line-height: 1.6; margin-bottom: 25px; }
+
+        .persona-card {
+            background: linear-gradient(135deg, #f0f3ff 0%, #e8f0fe 100%);
+            border: 3px solid #667eea;
+            border-radius: 15px;
+            padding: 30px;
+            margin: 25px 0;
         }
 
         .persona-header {
-            text-align: center;
-            padding: 30px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            border-radius: 20px 20px 0 0;
-            margin: -40px -40px 30px -40px;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            margin-bottom: 20px;
         }
 
         .persona-avatar {
-            font-size: 5em;
-            margin-bottom: 10px;
-        }
-
-        .persona-name {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             font-size: 2.5em;
-            font-weight: bold;
-            margin-bottom: 5px;
+            color: white;
+            flex-shrink: 0;
         }
 
-        .persona-profession {
-            font-size: 1.2em;
-            opacity: 0.9;
-        }
+        .persona-info h3 { color: #667eea; font-size: 1.5em; margin-bottom: 5px; }
+        .persona-info p { color: #666; }
 
         .persona-details {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 20px;
-            margin: 30px 0;
-            padding: 25px;
-            background: #f8f9fa;
-            border-radius: 15px;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 15px;
         }
 
         .detail-item {
-            padding: 15px;
-            background: white;
+            display: flex;
+            margin: 10px 0;
+            padding: 8px 0;
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        .detail-item:last-child { border-bottom: none; }
+        .detail-label { font-weight: bold; color: #667eea; min-width: 140px; }
+        .detail-value { color: #333; flex: 1; }
+
+        .dilemma-box {
+            background: #fff8e1;
+            border-left: 5px solid #ffa726;
+            padding: 25px;
             border-radius: 10px;
+            margin: 25px 0;
         }
 
-        .detail-label {
+        .dilemma-title {
+            color: #e65100;
             font-weight: bold;
-            color: #667eea;
-            margin-bottom: 5px;
-            font-size: 0.9em;
-        }
-
-        .detail-value {
-            color: #333;
-            line-height: 1.5;
-        }
-
-        h2 {
-            color: #333;
-            margin: 30px 0 15px 0;
-            font-size: 1.8em;
+            font-size: 1.3em;
+            margin-bottom: 15px;
         }
 
         .dilemma-text {
             color: #555;
             line-height: 1.8;
-            font-size: 1.1em;
-            margin: 20px 0;
+            margin-bottom: 15px;
         }
 
-        .highlight-box {
-            background: #fff3cd;
-            border-left: 5px solid #ffc107;
+        .conflict-list {
+            background: white;
             padding: 20px;
-            margin: 25px 0;
             border-radius: 8px;
+            margin-top: 15px;
         }
 
-        .highlight-box strong {
-            color: #856404;
-        }
+        .conflict-list h4 { color: #e65100; margin-bottom: 10px; }
+        .conflict-list ul { padding-left: 20px; }
+        .conflict-list li { margin: 8px 0; color: #555; line-height: 1.6; }
 
-        .options-container {
-            margin: 40px 0;
+        .decision-options {
+            display: grid;
+            gap: 20px;
+            margin: 30px 0;
         }
 
         .option-card {
             background: #f8f9fa;
             border: 3px solid #e0e0e0;
-            border-radius: 15px;
+            border-radius: 12px;
             padding: 25px;
-            margin: 20px 0;
             cursor: pointer;
             transition: all 0.3s;
+            position: relative;
         }
 
         .option-card:hover {
             border-color: #667eea;
             transform: translateY(-3px);
-            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.3);
         }
 
         .option-card.selected {
@@ -140,44 +190,55 @@
             background: linear-gradient(135deg, #f0f3ff 0%, #e8f0fe 100%);
         }
 
-        .option-header {
+        .option-number {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            width: 35px;
+            height: 35px;
+            background: #667eea;
+            color: white;
+            border-radius: 50%;
             display: flex;
             align-items: center;
-            gap: 15px;
-            margin-bottom: 15px;
-        }
-
-        .option-icon {
-            font-size: 2.5em;
+            justify-content: center;
+            font-weight: bold;
         }
 
         .option-title {
-            font-size: 1.3em;
+            font-size: 1.2em;
             font-weight: bold;
             color: #333;
+            margin-bottom: 12px;
+            padding-right: 50px;
         }
 
         .option-description {
             color: #666;
             line-height: 1.6;
-            margin-left: 60px;
+            font-size: 0.95em;
         }
 
         .frameworks-section {
-            margin: 40px 0;
-            padding: 30px;
+            margin: 35px 0;
+            padding: 25px;
             background: #f0f3ff;
-            border-radius: 15px;
+            border-radius: 12px;
         }
 
         .frameworks-title {
-            font-size: 1.5em;
             color: #333;
-            margin-bottom: 20px;
-            text-align: center;
+            font-size: 1.4em;
+            margin-bottom: 15px;
         }
 
-        .frameworks-grid {
+        .frameworks-subtitle {
+            color: #666;
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+
+        .framework-buttons {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
             gap: 15px;
@@ -188,11 +249,11 @@
             border: 2px solid #667eea;
             color: #667eea;
             padding: 15px 20px;
-            border-radius: 12px;
+            border-radius: 10px;
             cursor: pointer;
-            transition: all 0.3s;
             font-size: 1em;
-            font-weight: bold;
+            font-weight: 600;
+            transition: all 0.3s;
             text-align: center;
         }
 
@@ -200,33 +261,86 @@
             background: #667eea;
             color: white;
             transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3);
         }
 
         .framework-btn.clicked {
-            background: #667eea;
+            background: #e8f0fe;
+            border-color: #4caf50;
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            margin-top: 30px;
+            flex-wrap: wrap;
+        }
+
+        .btn-primary, .btn-secondary {
+            padding: 15px 40px;
+            border-radius: 25px;
+            font-size: 1.1em;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: none;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
         }
 
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.4);
+        }
+
+        .btn-primary:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .btn-secondary {
+            background: white;
+            border: 2px solid #667eea;
+            color: #667eea;
+        }
+
+        .btn-secondary:hover { background: #f0f3ff; }
+
+        /* Modal Styles */
         .modal {
             display: none;
             position: fixed;
-            top: 0;
+            z-index: 1000;
             left: 0;
+            top: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0,0,0,0.8);
-            z-index: 1000;
-            overflow-y: auto;
-            padding: 20px;
+            background: rgba(0, 0, 0, 0.6);
+            animation: fadeIn 0.3s;
         }
+
+        .modal.active { display: flex; align-items: center; justify-content: center; }
 
         .modal-content {
             background: white;
-            max-width: 800px;
-            margin: 50px auto;
             border-radius: 20px;
+            max-width: 700px;
+            width: 90%;
+            max-height: 80vh;
+            overflow-y: auto;
             padding: 40px;
             position: relative;
+            animation: slideUp 0.3s;
+        }
+
+        @keyframes slideUp {
+            from { transform: translateY(50px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
         }
 
         .modal-close {
@@ -234,475 +348,857 @@
             top: 20px;
             right: 20px;
             font-size: 2em;
-            cursor: pointer;
             color: #999;
-            transition: color 0.3s;
+            cursor: pointer;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            transition: all 0.3s;
         }
 
-        .modal-close:hover { color: #333; }
+        .modal-close:hover { background: #f0f0f0; color: #333; }
 
         .modal h3 {
             color: #667eea;
-            font-size: 2em;
+            font-size: 1.8em;
             margin-bottom: 20px;
         }
 
-        .modal-text {
-            color: #555;
-            line-height: 1.8;
-            font-size: 1.05em;
-        }
-
         .modal-section {
-            margin: 25px 0;
+            margin: 20px 0;
         }
 
         .modal-section h4 {
             color: #333;
+            font-size: 1.2em;
             margin-bottom: 10px;
         }
 
-        .submit-btn {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            border: none;
-            padding: 18px 50px;
-            border-radius: 30px;
-            font-size: 1.2em;
-            cursor: pointer;
-            transition: all 0.3s;
-            margin-top: 30px;
-            font-weight: bold;
-            display: block;
-            width: 100%;
+        .modal-section p, .modal-section ul {
+            color: #555;
+            line-height: 1.8;
+            margin: 10px 0;
         }
 
-        .submit-btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.4);
+        .modal-section ul {
+            padding-left: 25px;
         }
 
-        .submit-btn:disabled {
-            opacity: 0.5;
-            cursor: not-allowed;
-            transform: none;
+        .modal-section li {
+            margin: 8px 0;
         }
 
-        .timer-box {
-            background: #e8f0fe;
+        .highlight-box {
+            background: #f0f3ff;
+            border-left: 4px solid #667eea;
             padding: 15px;
-            border-radius: 12px;
+            margin: 15px 0;
+            border-radius: 5px;
+        }
+
+        .result-card {
+            background: linear-gradient(135deg, #f0f3ff 0%, #e8f0fe 100%);
+            border: 3px solid #667eea;
+            border-radius: 15px;
+            padding: 35px;
+            margin: 25px 0;
             text-align: center;
-            margin: 20px 0;
         }
 
-        .timer-label {
-            color: #666;
-            font-size: 0.9em;
-            margin-bottom: 5px;
+        .result-icon {
+            font-size: 4em;
+            margin-bottom: 20px;
         }
 
-        .timer-value {
+        .result-title {
             color: #667eea;
             font-size: 2em;
             font-weight: bold;
+            margin-bottom: 15px;
+        }
+
+        .result-text {
+            color: #555;
+            font-size: 1.1em;
+            line-height: 1.8;
+            margin-bottom: 20px;
+        }
+
+        .result-stats {
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px 0;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 20px;
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 2em;
+            font-weight: bold;
+            color: #667eea;
+        }
+
+        .stat-label {
+            color: #666;
+            margin-top: 5px;
+            font-size: 0.9em;
         }
 
         @media (max-width: 768px) {
-            .persona-details { grid-template-columns: 1fr; }
-            .frameworks-grid { grid-template-columns: 1fr; }
-            .option-description { margin-left: 0; margin-top: 10px; }
+            header { flex-direction: column; text-align: center; }
+            .back-btn { margin-top: 15px; }
+            .content { padding: 25px; }
+            h2 { font-size: 1.6em; }
+            .persona-header { flex-direction: column; text-align: center; }
+            .framework-buttons { grid-template-columns: 1fr; }
+            .action-buttons { flex-direction: column; }
+            .btn-primary, .btn-secondary { width: 100%; }
+            .modal-content { padding: 25px; width: 95%; }
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <a href="dashboard.html" class="back-link">← Zurück zum Dashboard</a>
+        <header>
+            <div class="header-left">
+                <h1>🌍 Zwischen Welten</h1>
+                <p>Ein ethisches Dilemma aus Zürich</p>
+            </div>
+            <a href="dashboard.html" class="back-btn">← Zurück</a>
+        </header>
 
-        <div class="card" id="main-content">
-            <!-- Persona Header -->
-            <div class="persona-header">
-                <div class="persona-avatar" id="persona-avatar">👤</div>
-                <div class="persona-name" id="persona-name">Lade...</div>
-                <div class="persona-profession" id="persona-profession"></div>
+        <div class="content">
+            <div class="progress-bar">
+                <div class="progress-fill" id="progress"></div>
             </div>
 
-            <!-- Persona Details -->
-            <div class="persona-details" id="persona-details"></div>
-
-            <!-- Timer -->
-            <div class="timer-box">
-                <div class="timer-label">Entscheidungszeit</div>
-                <div class="timer-value" id="timer">0:00</div>
-            </div>
-
-            <!-- Dilemma -->
-            <h2>🌍 Deine Situation</h2>
-            <div class="dilemma-text" id="dilemma-text">
-                <!-- Wird dynamisch gefüllt -->
-            </div>
-
-            <div class="highlight-box">
-                <strong>Die zentrale Frage:</strong> Was ist dir wichtiger - die Tradition und Familie oder deine persönliche Karriere und Unabhängigkeit?
-            </div>
-
-            <!-- Ethical Frameworks Info -->
-            <div class="frameworks-section">
-                <div class="frameworks-title">📚 Ethische Perspektiven</div>
-                <p style="text-align: center; color: #666; margin-bottom: 20px;">
-                    Bevor du entscheidest: Wie würden verschiedene ethische Theorien diese Situation bewerten?
+            <!-- Step 1: Introduction -->
+            <div class="step active" id="step-intro">
+                <h2>Willkommen zum Dilemma</h2>
+                <p class="subtitle">
+                    Jugendliche mit Migrationshintergrund in Zürich navigieren komplexe Spannungsfelder zwischen 
+                    elterlichen Erwartungen, wirtschaftlichem Druck und kulturellen Werten. Du wirst gleich eine 
+                    authentische Persona zugewiesen bekommen und eine schwierige Entscheidung treffen müssen.
                 </p>
-                <div class="frameworks-grid">
-                    <button class="framework-btn" onclick="showFramework('utilitarismus')">
-                        ⚖️ Utilitarismus
-                    </button>
-                    <button class="framework-btn" onclick="showFramework('kant')">
-                        📜 Deontologie (Kant)
-                    </button>
-                    <button class="framework-btn" onclick="showFramework('tugend')">
-                        🎯 Tugendethik
-                    </button>
-                    <button class="framework-btn" onclick="showFramework('kommunitarismus')">
-                        🤝 Kommunitarismus
+
+                <div style="background: #f8f9fa; padding: 25px; border-radius: 12px; margin: 25px 0;">
+                    <h3 style="color: #333; margin-bottom: 15px;">📋 Was dich erwartet:</h3>
+                    <ul style="color: #666; line-height: 2; padding-left: 25px;">
+                        <li>Eine realistische Persona mit authentischem Hintergrund</li>
+                        <li>Ein existenzielles Dilemma ohne "richtige" Antwort</li>
+                        <li>5 verschiedene Entscheidungsoptionen</li>
+                        <li>Einblicke in 4 ethische Denkweisen (optional)</li>
+                        <li>Feedback zu deiner Entscheidung</li>
+                    </ul>
+                </div>
+
+                <div class="action-buttons">
+                    <button class="btn-primary" onclick="nextStep()">Los geht's →</button>
+                </div>
+            </div>
+
+            <!-- Step 2: Persona Assignment -->
+            <div class="step" id="step-persona">
+                <h2>Deine Persona</h2>
+                <p class="subtitle">
+                    Du schlüpfst in die Rolle einer realen Person aus Zürich. Diese Persona basiert auf 
+                    ausführlicher Recherche und dokumentierten Erfahrungen.
+                </p>
+
+                <div class="persona-card" id="persona-card">
+                    <!-- Wird dynamisch gefüllt -->
+                </div>
+
+                <div class="action-buttons">
+                    <button class="btn-secondary" onclick="prevStep()">← Zurück</button>
+                    <button class="btn-primary" onclick="nextStep()">Weiter →</button>
+                </div>
+            </div>
+
+            <!-- Step 3: The Dilemma -->
+            <div class="step" id="step-dilemma">
+                <h2>Das Dilemma</h2>
+                
+                <div class="dilemma-box" id="dilemma-box">
+                    <!-- Wird dynamisch gefüllt -->
+                </div>
+
+                <div class="action-buttons">
+                    <button class="btn-secondary" onclick="prevStep()">← Zurück</button>
+                    <button class="btn-primary" onclick="nextStep()">Entscheidung treffen →</button>
+                </div>
+            </div>
+
+            <!-- Step 4: Decision -->
+            <div class="step" id="step-decision">
+                <h2>Deine Entscheidung</h2>
+                <p class="subtitle">
+                    Wähle eine der folgenden Optionen. Es gibt keine "richtige" Antwort – jede Wahl hat 
+                    Konsequenzen und ethische Implikationen.
+                </p>
+
+                <div class="decision-options" id="decision-options">
+                    <!-- Wird dynamisch gefüllt -->
+                </div>
+
+                <div class="frameworks-section">
+                    <h3 class="frameworks-title">💡 Ethische Perspektiven (Optional)</h3>
+                    <p class="frameworks-subtitle">
+                        Möchtest du verstehen, wie verschiedene ethische Denkweisen diese Situation bewerten würden? 
+                        Klicke auf ein Framework, um mehr zu erfahren.
+                    </p>
+                    <div class="framework-buttons">
+                        <button class="framework-btn" onclick="showFramework('utilitarismus')">
+                            📊 Utilitarismus
+                        </button>
+                        <button class="framework-btn" onclick="showFramework('kant')">
+                            ⚖️ Deontologie (Kant)
+                        </button>
+                        <button class="framework-btn" onclick="showFramework('tugend')">
+                            🎯 Tugendethik
+                        </button>
+                        <button class="framework-btn" onclick="showFramework('kommunitarismus')">
+                            🤝 Kommunitarismus
+                        </button>
+                    </div>
+                </div>
+
+                <div class="action-buttons">
+                    <button class="btn-secondary" onclick="prevStep()">← Zurück</button>
+                    <button class="btn-primary" id="submit-btn" onclick="submitDecision()" disabled>
+                        Entscheidung bestätigen
                     </button>
                 </div>
             </div>
 
-            <!-- Options -->
-            <h2>💭 Deine Entscheidung</h2>
-            <p style="color: #666; margin-bottom: 20px;">Wähle eine Option, die deiner Überzeugung am nächsten kommt:</p>
+            <!-- Step 5: Result -->
+            <div class="step" id="step-result">
+                <div class="result-card">
+                    <div class="result-icon">✅</div>
+                    <h2 class="result-title">Entscheidung gespeichert</h2>
+                    <p class="result-text" id="result-text">
+                        <!-- Wird dynamisch gefüllt -->
+                    </p>
 
-            <div class="options-container" id="options-container">
-                <!-- Options werden dynamisch generiert -->
+                    <div class="result-stats" id="result-stats">
+                        <!-- Wird dynamisch gefüllt -->
+                    </div>
+                </div>
+
+                <div style="background: #f8f9fa; padding: 25px; border-radius: 12px; margin: 25px 0;">
+                    <h3 style="color: #333; margin-bottom: 15px;">💭 Reflexion</h3>
+                    <p style="color: #666; line-height: 1.8;">
+                        Es gibt keine "richtige" Antwort auf dieses Dilemma. Jede Entscheidung hat Kosten und 
+                        Konsequenzen. Die Stärke liegt darin, die verschiedenen Perspektiven zu verstehen und 
+                        eine informierte Wahl zu treffen, während man sich der Trade-offs bewusst ist.
+                    </p>
+                </div>
+
+                <div class="action-buttons">
+                    <button class="btn-secondary" onclick="window.location.href='dashboard.html'">
+                        ← Zurück zum Dashboard
+                    </button>
+                    <button class="btn-primary" onclick="window.location.href='statistics.html'">
+                        Statistiken ansehen 📊
+                    </button>
+                </div>
             </div>
-
-            <button class="submit-btn" id="submit-btn" disabled onclick="submitDecision()">
-                Entscheidung bestätigen
-            </button>
         </div>
     </div>
 
-    <!-- Framework Modal -->
-    <div class="modal" id="framework-modal">
+    <!-- Framework Modals -->
+    <div class="modal" id="modal-utilitarismus">
         <div class="modal-content">
-            <span class="modal-close" onclick="closeModal()">&times;</span>
-            <div id="modal-body"></div>
+            <span class="modal-close" onclick="closeModal('utilitarismus')">&times;</span>
+            <h3>📊 Utilitarismus: Größtes Gut für größte Zahl</h3>
+            
+            <div class="modal-section">
+                <h4>Was ist Utilitarismus?</h4>
+                <p>
+                    Utilitarismus fragt: "Welche Wahl produziert das meiste Gute für die meisten Menschen?" 
+                    Entwickelt von Jeremy Bentham und John Stuart Mill, beurteilt dieser Ansatz Handlungen 
+                    durch ihre Konsequenzen, nicht durch Regeln oder Intentionen.
+                </p>
+            </div>
+
+            <div class="modal-section">
+                <h4>Anwendung auf dieses Dilemma</h4>
+                <p>
+                    Ein Utilitarist würde versuchen, das Gesamtwohlbefinden zu berechnen: Wie viel Leiden 
+                    verursacht gegenwärtiger Hunger versus zukünftige Nahrungsknappheit? Wie viele Menschen 
+                    profitieren von sofortigem Einkommen versus langfristiger Bildung?
+                </p>
+                <div class="highlight-box">
+                    <strong>Zentrale Frage:</strong> Welche Option maximiert das Wohlergehen aller Beteiligten 
+                    – Familie, Individuum, Gemeinschaft – über die Zeit hinweg?
+                </div>
+            </div>
+
+            <div class="modal-section">
+                <h4>✅ Stärken</h4>
+                <ul>
+                    <li>Berücksichtigt alle Betroffenen – Familie, Individuum, zukünftige Generationen</li>
+                    <li>Fokussiert auf echten Schaden (Hunger, Armut) statt abstrakten Prinzipien</li>
+                    <li>Flexibel und pragmatisch basierend auf tatsächlichen Bedingungen</li>
+                </ul>
+            </div>
+
+            <div class="modal-section">
+                <h4>⚠️ Grenzen im kulturellen Kontext</h4>
+                <ul>
+                    <li>Kämpft damit, kulturelle Identität und Familienehre zu "messen"</li>
+                    <li>Könnte traditionelle Werte unterbewertet, die für Gemeinschaften zentral sind</li>
+                    <li>Behandelt komplexe Beziehungen als simple Berechnungen</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal" id="modal-kant">
+        <div class="modal-content">
+            <span class="modal-close" onclick="closeModal('kant')">&times;</span>
+            <h3>⚖️ Deontologie: Moralischen Pflichten folgen</h3>
+            
+            <div class="modal-section">
+                <h4>Was ist Deontologie?</h4>
+                <p>
+                    Deontologie, entwickelt von Immanuel Kant, beurteilt Handlungen danach, ob sie moralischen 
+                    Pflichten und universellen Prinzipien folgen, nicht nach ihren Ergebnissen. Der "kategorische 
+                    Imperativ" besagt: Handle nur nach Regeln, von denen du wollen könntest, dass alle ihnen folgen.
+                </p>
+            </div>
+
+            <div class="modal-section">
+                <h4>Anwendung auf dieses Dilemma</h4>
+                <p>
+                    Deontologie identifiziert multiple Pflichten: zur hungrigen Familie, zu eigenen Talenten und 
+                    Potenzial, zu kulturellen Traditionen, zu zukünftigen Generationen. Diese Pflichten können 
+                    konfligieren.
+                </p>
+                <div class="highlight-box">
+                    <strong>Zentrale Frage:</strong> Welche moralischen Verpflichtungen habe ich, und wie 
+                    priorisiere ich sie, wenn sie in Konflikt stehen?
+                </div>
+            </div>
+
+            <div class="modal-section">
+                <h4>✅ Stärken</h4>
+                <ul>
+                    <li>Respektiert Rechte aller Parteien – Eltern, Geschwister, eigene Zukunft</li>
+                    <li>Erkennt kulturelle Erwartungen als ernsthafte moralische Verpflichtungen</li>
+                    <li>Bietet klare Orientierung auch bei unsicheren Ergebnissen</li>
+                </ul>
+            </div>
+
+            <div class="modal-section">
+                <h4>⚠️ Grenzen im kulturellen Kontext</h4>
+                <ul>
+                    <li>Kann zu starr sein in Krisensituationen (extremer Hunger)</li>
+                    <li>Kämpft, wenn Pflichten konfligieren – Familie vs. Selbstverwirklichung</li>
+                    <li>Kants westliche Rationalität passt nicht immer zu relationaler Ethik</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal" id="modal-tugend">
+        <div class="modal-content">
+            <span class="modal-close" onclick="closeModal('tugend')">&times;</span>
+            <h3>🎯 Tugendethik: Was würde die gute Person tun?</h3>
+            
+            <div class="modal-section">
+                <h4>Was ist Tugendethik?</h4>
+                <p>
+                    Tugendethik, von Aristoteles begründet, fragt nicht "Was ist die Regel?" oder "Was sind die 
+                    Konsequenzen?", sondern "Was für eine Person sollte ich sein?" Sie fokussiert auf die 
+                    Entwicklung exzellenter Charaktereigenschaften wie Weisheit, Mut, Gerechtigkeit und Mäßigung.
+                </p>
+            </div>
+
+            <div class="modal-section">
+                <h4>Anwendung auf dieses Dilemma</h4>
+                <p>
+                    Tugendethik untersucht: Welchen Charakter würde die gute Tochter/der gute Sohn entwickeln? 
+                    Relevante Tugenden sind praktische Weisheit (kluge Entscheidungen), Mut (gegen Druck standhaft 
+                    bleiben), Gerechtigkeit (fair zu allen Beteiligten), Respekt und Integrität.
+                </p>
+                <div class="highlight-box">
+                    <strong>Zentrale Frage:</strong> Welche Wahl demonstriert die Tugenden, die ich kultivieren 
+                    möchte, und hilft mir, ein gutes Leben im Einklang mit meinen Werten zu führen?
+                </div>
+            </div>
+
+            <div class="modal-section">
+                <h4>✅ Stärken</h4>
+                <ul>
+                    <li>Holistisch – berücksichtigt die ganze Person und ihre Beziehungen</li>
+                    <li>Schätzt praktische Weisheit und ortsbasiertes Wissen</li>
+                    <li>Passt gut zu kultureller Betonung auf Charakterentwicklung und Mentorschaft</li>
+                    <li>Langfristige Perspektive – Gedeihen erfordert nachhaltige Beziehungen</li>
+                </ul>
+            </div>
+
+            <div class="modal-section">
+                <h4>⚠️ Grenzen</h4>
+                <ul>
+                    <li>Manchmal vage über spezifische Handlungen in konkreten Situationen</li>
+                    <li>Kulturelle Variation in Tugenden – was ist "gut" in verschiedenen Kulturen?</li>
+                    <li>Weniger hilfreich in akuten Krisen mit Zeitdruck</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal" id="modal-kommunitarismus">
+        <div class="modal-content">
+            <span class="modal-close" onclick="closeModal('kommunitarismus')">&times;</span>
+            <h3>🤝 Kommunitarismus: Gemeinschaftswerte und Beziehungen</h3>
+            
+            <div class="modal-section">
+                <h4>Was ist Kommunitarismus?</h4>
+                <p>
+                    Kommunitarismus, entwickelt von Alasdair MacIntyre, Michael Sandel und Charles Taylor, 
+                    argumentiert, dass Individuen fundamental von ihren Gemeinschaften, Traditionen und 
+                    Beziehungen geformt sind. Unsere Identitäten entstehen aus den Gemeinschaften, denen 
+                    wir angehören, nicht aus abstrakten universellen Prinzipien.
+                </p>
+            </div>
+
+            <div class="modal-section">
+                <h4>Anwendung auf dieses Dilemma</h4>
+                <p>
+                    Kommunitarismus betont: Du bist kein isoliertes Individuum, sondern eingebettet in Familie, 
+                    Herkunftskultur, Schweizer Gesellschaft, und Migrantencommunity. Deine Rolle bringt 
+                    Verantwortungen mit sich, die durch Gemeinschaftstraditionen definiert sind.
+                </p>
+                <div class="highlight-box">
+                    <strong>Zentrale Frage:</strong> Was lehren uns unsere geteilten Traditionen? Wie erhalten 
+                    wir Beziehungen mit allen Gemeinschaften, denen wir angehören?
+                </div>
+            </div>
+
+            <div class="modal-section">
+                <h4>✅ Stärken</h4>
+                <ul>
+                    <li>Ehrt Traditionen als Weisheit, nicht als Aberglaube</li>
+                    <li>Passt zu kulturellen gemeinschaftlichen Werten</li>
+                    <li>Erkennt, wir sind fundamental relational, nicht isoliert</li>
+                    <li>Schätzt ortsbasiertes Wissen über abstrakte Prinzipien</li>
+                </ul>
+            </div>
+
+            <div class="modal-section">
+                <h4>⚠️ Grenzen</h4>
+                <ul>
+                    <li>Kann nötiger Anpassung widerstehen (z.B. an neue Schweizer Realitäten)</li>
+                    <li>Gemeinschaften können auch unterdrückend sein</li>
+                    <li>Wessen Stimme definiert "Gemeinschaftswerte"?</li>
+                    <li>Wie Konflikte zwischen verschiedenen Gemeinschaften auflösen?</li>
+                </ul>
+            </div>
         </div>
     </div>
 
     <script type="module">
+        import { getCurrentUser, isUserLoggedIn, markDilemmaCompleted } from './user.js';
         import { db } from './config.js';
-        import { getCurrentUser, markDilemmaCompleted } from './user.js';
         import { collection, addDoc } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js';
 
-        // App State
-        const appState = {
-            user: getCurrentUser(),
-            persona: null,
-            selectedOption: null,
-            startTime: Date.now(),
-            frameworksClicked: [],
-            timerInterval: null
-        };
+        // Check if user is logged in
+        if (!isUserLoggedIn()) {
+            window.location.href = 'index.html';
+        }
 
-        // Personas Definition
+        const user = getCurrentUser();
+
+        // Personas Data
         const personas = [
             {
-                id: 'leyla',
-                name: 'Leyla',
-                age: 26,
-                gender: 'weiblich',
-                avatar: '👩🏻',
-                profession: 'Architektin',
-                background: 'Geboren in Deutschland, Eltern aus der Türkei',
-                education: 'Master in Architektur, TU Berlin',
-                jobOffer: 'Renommiertes Architekturbüro in Hamburg',
-                family: 'Vater (krank), Mutter, jüngere Schwester (Medizinstudentin)',
-                personality: 'Kreativ, pflichtbewusst, zwischen Tradition und Moderne zerrissen',
-                dream: 'Nachhaltige Stadtentwicklung, Brücken zwischen Kulturen bauen'
+                id: 'elif',
+                name: 'Elif',
+                age: 16,
+                background: 'Türkisch-kurdisch',
+                location: 'Zürich-Schwamendingen',
+                emoji: '👧',
+                details: {
+                    'Situation': 'Gute Noten in Sekundarschule A, könnte Kurzgymnasium schaffen',
+                    'Traum': 'Medizin studieren',
+                    'Familie': 'Vater Bauarbeiter (CHF 4\'500/Mt), Mutter Reinigung (CHF 2\'000/Mt), 2 Geschwister',
+                    'Wohnsituation': '3.5-Zimmer in Schwamendingen (CHF 2\'800/Mt + CHF 2\'200/Mt Krankenversicherung)',
+                    'Besonderheit': 'Konservative Familie, erweiterte Familie übt Druck aus'
+                },
+                dilemma: {
+                    title: '🎓 Gymnasium oder schnell Geld verdienen?',
+                    situation: 'Deine Noten sind gut genug fürs Gymnasium. Mit Glück und harter Arbeit könntest du in 4 Jahren Matura machen und dann Medizin studieren – dein Traum seit Jahren. Aber dein Vater besteht auf eine KV-Lehre.',
+                    conflict: [
+                        'KV-Lehre: CHF 650/Mt im ersten Jahr, nach 4 Jahren CHF 5\'367/Mt',
+                        'Gymnasium: 4 Jahre ohne Einkommen, dann 6 Jahre Studium',
+                        'Familie braucht dringend finanzielle Unterstützung',
+                        'Konservative Familie: "Ein Mädchen braucht keine Uni"',
+                        'Erweiterte Familie und Community üben Druck aus',
+                        'Du fühlst massive Schuldgefühle: "Meine Eltern haben so viel geopfert"'
+                    ]
+                },
+                options: [
+                    {
+                        id: 'family',
+                        title: '👨‍👩‍👧‍👦 Familie & Tradition',
+                        description: 'Ich mache die KV-Lehre wie meine Eltern es wollen. Familie geht vor, ich kann sie jetzt nicht im Stich lassen.'
+                    },
+                    {
+                        id: 'compromise',
+                        title: '⚖️ Kompromiss',
+                        description: 'KV mit Berufsmaturität – dann später Fachhochschule. Ich verdiene Geld UND kann studieren, nur anders.'
+                    },
+                    {
+                        id: 'career',
+                        title: '🎯 Karriere & Unabhängigkeit',
+                        description: 'Ich kämpfe fürs Gymnasium. Es wird hart, aber ich hole mir Unterstützung von Mentoring-Programmen.'
+                    },
+                    {
+                        id: 'delay',
+                        title: '⏰ Zeit für Entscheidung',
+                        description: 'Ich mache erstmal ein Zwischenjahr mit Praktika und Sprachkursen, um herauszufinden, was ich wirklich will.'
+                    },
+                    {
+                        id: 'community',
+                        title: '🤝 Gemeinschaftslösung',
+                        description: 'Ich suche das Gespräch mit vertrauenswürdigen Community-Mitgliedern, die beide Welten kennen.'
+                    }
+                ]
             },
             {
-                id: 'cem',
-                name: 'Cem',
-                age: 28,
-                gender: 'männlich',
-                avatar: '👨🏻',
-                profession: 'Software-Ingenieur',
-                background: 'In Deutschland aufgewachsen, kurdische Wurzeln',
-                education: 'Bachelor & Master Informatik, TU München',
-                jobOffer: 'Startup in Berlin mit Führungsposition',
-                family: 'Vater (krank), Mutter, jüngere Schwester (BWL-Studium)',
-                personality: 'Analytisch, familiär orientiert, sucht optimale Lösungen',
-                dream: 'Technologie für soziale Gerechtigkeit einsetzen'
+                id: 'luan',
+                name: 'Luan',
+                age: 18,
+                background: 'Kosovo-albanisch (2. Generation)',
+                location: 'Zürich-Altstetten',
+                emoji: '👦',
+                details: {
+                    'Situation': 'Polymechaniker-Lehrstelle bei renommiertem Betrieb angeboten',
+                    'Talent': 'Handwerklich sehr begabt, liebt praktische Arbeit',
+                    'Familie': 'Eltern betreiben serbisches Restaurant (Kreis 5), arbeiten 6 Tage/Woche',
+                    'Schulniveau': 'Sekundarschule B, Gymnasium wäre sehr schwer',
+                    'Besonderheit': 'Starker Druck wegen Familienehre und Community-Status'
+                },
+                dilemma: {
+                    title: '🔧 Handwerk oder akademischer Prestige?',
+                    situation: 'Du hast ein Angebot für eine Polymechaniker-Lehre bei einem top Betrieb. Nach 4 Jahren würdest du CHF 5\'500+/Mt verdienen. Aber deine Eltern bestehen: "Du MUSST aufs Gymnasium, sonst bist du ein Niemand."',
+                    conflict: [
+                        'Du bist handwerklich begabt und liebst praktische Arbeit',
+                        'Gymnasium wäre extrem schwer für dich (Sekundarschule B-Niveau)',
+                        'In der Herkunftskultur: "Handwerker = Versager"',
+                        'Statusangst: Was denkt die erweiterte Familie?',
+                        'Älterer Bruder macht KV – du solltest "höher" hinaus',
+                        'Du leidest unter dem Gefühl, eine Enttäuschung zu sein'
+                    ]
+                },
+                options: [
+                    {
+                        id: 'family',
+                        title: '👨‍👩‍👧‍👦 Familie & Tradition',
+                        description: 'Ich versuche das Gymnasium, auch wenn es hart wird. Die Familienehre ist wichtiger als meine eigenen Wünsche.'
+                    },
+                    {
+                        id: 'compromise',
+                        title: '⚖️ Kompromiss',
+                        description: 'Polymechaniker-Lehre + Berufsmaturität + dann FH Maschinenbau-Ingenieur. Praktisch UND prestigeträchtig!'
+                    },
+                    {
+                        id: 'career',
+                        title: '🎯 Karriere & Unabhängigkeit',
+                        description: 'Ich mache die Polymechaniker-Lehre. Das ist mein Talent, mein Weg. Meine Familie wird das akzeptieren müssen.'
+                    },
+                    {
+                        id: 'delay',
+                        title: '⏰ Zeit für Entscheidung',
+                        description: 'Ich verschiebe um ein Jahr, arbeite im Restaurant mit und beweise erstmal, dass ich reif bin für große Entscheidungen.'
+                    },
+                    {
+                        id: 'community',
+                        title: '🤝 Gemeinschaftslösung',
+                        description: 'Ich organisiere ein Treffen mit erfolgreichen Handwerkern aus unserer Community, die meinen Eltern zeigen, dass Berufsbildung wertvoll ist.'
+                    }
+                ]
             },
             {
-                id: 'aylin',
-                name: 'Aylin',
-                age: 25,
-                gender: 'weiblich',
-                avatar: '👩🏽',
-                profession: 'Grafikdesignerin',
-                background: 'Zweite Generation, türkisch-deutsche Identität',
-                education: 'Design-Studium, HfG Offenbach',
-                jobOffer: 'Kreativagentur in Frankfurt, Art Director Position',
-                family: 'Vater (krank), Mutter, jüngerer Bruder (Ausbildung)',
-                personality: 'Künstlerisch, empathisch, sucht nach Harmonie',
-                dream: 'Kulturelle Vielfalt durch Design sichtbar machen'
+                id: 'mariana',
+                name: 'Mariana',
+                age: 17,
+                background: 'Portugiesisch',
+                location: 'Zürich-Oerlikon',
+                emoji: '👩',
+                details: {
+                    'Situation': 'Sekundarschule A abgeschlossen, starkes Interesse an Informatik',
+                    'Erfahrung': 'Hat Schnupperlehre bei Software-Firma gemacht',
+                    'Familie': 'Vater Maurer, Mutter Verkäuferin, traditionelle Werte',
+                    'Geschlecht': 'Einziges Mädchen unter 12 männlichen Lehrlingen in Schnupperlehre',
+                    'Besonderheit': 'Geschlechternormen vs. hohes Verdienstpotenzial'
+                },
+                dilemma: {
+                    title: '💻 IT-Pionierin oder traditioneller Frauenberuf?',
+                    situation: 'Nach der Schnupperlehre bei einer Software-Firma bist du begeistert von Informatik. Nach abgeschlossener Lehre würdest du CHF 6\'370/Mt verdienen – das höchste Durchschnittsgehalt. Aber deine Mutter schlägt Detailhandel oder Pflege vor: "Das sind Frauenberufe, da fühlst du dich wohl."',
+                    conflict: [
+                        'IT: CHF 6\'370/Mt nach Abschluss, spannende Karriere',
+                        'Detailhandel: Unter CHF 5\'000/Mt (CHF 1\'370+ Unterschied!)',
+                        'Vater skeptisch: "IT ist für Männer, zu technisch"',
+                        'In Schnupperlehre warst du das einzige Mädchen',
+                        'Wenige weibliche Vorbilder in technischen Berufen',
+                        'Diese Geschlechternorm kostet dich über dein Leben Hunderttausende CHF'
+                    ]
+                },
+                options: [
+                    {
+                        id: 'family',
+                        title: '👨‍👩‍👧‍👦 Familie & Tradition',
+                        description: 'Ich mache Detailhandel oder Pflege. Die Familie hat recht – da passe ich besser hin als Frau.'
+                    },
+                    {
+                        id: 'compromise',
+                        title: '⚖️ Kompromiss',
+                        description: 'KV mit Schwerpunkt Informatik – dann kann ich später trotzdem in IT quereinsteigen, ohne so sehr anzuecken.'
+                    },
+                    {
+                        id: 'career',
+                        title: '🎯 Karriere & Unabhängigkeit',
+                        description: 'Informatik-Lehre! Ich hole mir Mentoring-Unterstützung und werde Vorbild für andere Mädchen.'
+                    },
+                    {
+                        id: 'delay',
+                        title: '⏰ Zeit für Entscheidung',
+                        description: 'Ich mache ein technisches Brückenangebot, um meine Fähigkeiten zu beweisen und mehr Sicherheit zu gewinnen.'
+                    },
+                    {
+                        id: 'community',
+                        title: '🤝 Gemeinschaftslösung',
+                        description: 'Ich suche weibliche IT-Profis aus der portugiesischen Community, die mit meinen Eltern sprechen.'
+                    }
+                ]
+            },
+            {
+                id: 'amanuel',
+                name: 'Amanuel',
+                age: 20,
+                background: 'Eritrea (Flüchtling)',
+                location: 'Asylunterkunft Zürich-Höngg',
+                emoji: '🧑',
+                details: {
+                    'Situation': 'War Lehrer in Eritrea, Diplom nicht anerkannt in der Schweiz',
+                    'Status': 'F-Bewilligung (vorläufig aufgenommen), traumatische Flucht',
+                    'Familie': 'Frau und Kind in Eritrea (Familiennachzug beantragt)',
+                    'Angebot': 'INVOL-Programm bietet Gärtner EBA (2 Jahre)',
+                    'Besonderheit': 'Beruflicher "Abstieg" vom respektierten Lehrer zu manueller Arbeit'
+                },
+                dilemma: {
+                    title: '🌱 Pragmatismus oder Aspirationen?',
+                    situation: 'In Eritrea warst du Lehrer – ein hochrespektierter Beruf. Hier ist dein Diplom nicht anerkannt. Das INVOL-Programm bietet dir eine Gärtner-Lehre (EBA, 2 Jahre) an der UZH. Schnelle finanzielle Unabhängigkeit, aber es fühlt sich an wie ein Abstieg.',
+                    conflict: [
+                        'Traum: Wieder als Lehrer arbeiten → Jahre bis zur Anerkennung, hohe Hürden',
+                        'Gärtner EBA: 2 Jahre, dann finanzielle Unabhängigkeit',
+                        'In Eritrea: Lehrer = Prestige, Gärtnerei = Subsistenz',
+                        'F-Bewilligung: Zugang zu Uni sehr kompliziert und teuer',
+                        'Frau und Kind warten in Eritrea – du brauchst Einkommen',
+                        'Schweizer System: Fokus auf "schnelle Beschäftigung", nicht Qualifikation'
+                    ]
+                },
+                options: [
+                    {
+                        id: 'family',
+                        title: '👨‍👩‍👧‍👦 Familie & Tradition',
+                        description: 'Ich warte und kämpfe weiter für die Anerkennung als Lehrer. Meine Qualifikation ist zu wertvoll, um aufzugeben.'
+                    },
+                    {
+                        id: 'compromise',
+                        title: '⚖️ Kompromiss',
+                        description: 'Gärtner EBA + Abendschule für Qualifikationen + später Quereinstieg in Sozialpädagogik (Arbeit mit Jugendlichen).'
+                    },
+                    {
+                        id: 'career',
+                        title: '🎯 Karriere & Unabhängigkeit',
+                        description: 'Ich mache Fachmann Betreuung (Sozialbereich) – näher an meinen Interessen als Gärtnerei.'
+                    },
+                    {
+                        id: 'delay',
+                        title: '⏰ Zeit für Entscheidung',
+                        description: 'Ich arbeite temporär ungelernt und spare Geld, während ich parallel an Diplomanerkennung arbeite.'
+                    },
+                    {
+                        id: 'community',
+                        title: '🤝 Gemeinschaftslösung',
+                        description: 'Ich kontaktiere eritreische Lehrer-Community in der Schweiz und NGOs, die bei Qualifikationsanerkennung helfen.'
+                    }
+                ]
             },
             {
                 id: 'mehmet',
                 name: 'Mehmet',
-                age: 27,
-                gender: 'männlich',
-                avatar: '👨🏽',
-                profession: 'Maschinenbauingenieur',
-                background: 'In Stuttgart geboren, türkische Familie',
-                education: 'Maschinenbau, Universität Stuttgart',
-                jobOffer: 'Automobilkonzern in München, Entwicklungsabteilung',
-                family: 'Vater (krank), Mutter, zwei jüngere Brüder',
-                personality: 'Pragmatisch, loyal, sucht praktische Lösungen',
-                dream: 'Nachhaltige Mobilität entwickeln'
-            },
-            {
-                id: 'zeynep',
-                name: 'Zeynep',
-                age: 24,
-                gender: 'weiblich',
-                avatar: '👩🏻',
-                profession: 'Psychologin',
-                background: 'Aufgewachsen in Köln, türkisch-arabische Familie',
-                education: 'Master Psychologie, Universität Köln',
-                jobOffer: 'Forschungsstelle in einer Klinik in Heidelberg',
-                family: 'Vater (krank), Mutter, Bruder (Anwalt)',
-                personality: 'Reflektiert, mitfühlend, sucht nach tieferem Sinn',
-                dream: 'Menschen mit Migrationshintergrund psychologisch unterstützen'
+                age: 16,
+                background: 'Türkei (2. Generation, in Zürich geboren)',
+                location: 'Zürich-Schwamendingen',
+                emoji: '👦',
+                details: {
+                    'Situation': 'Zimmermann-Lehrstelle in Aussicht, liebt Arbeit mit Holz',
+                    'Familie': 'Eltern kamen als ungelernte Arbeiter, schufteten 20+ Jahre',
+                    'Schulniveau': 'Sekundarschule B, Gymnasium unrealistisch',
+                    'Opfernarrativ': 'Eltern: "Wir haben Heimat verlassen und geschuftet – damit DU studieren kannst"',
+                    'Besonderheit': 'Starkes Opfernarrativ der Eltern belastet emotional'
+                },
+                dilemma: {
+                    title: '🪵 Handwerker oder Arzt werden?',
+                    situation: 'Du liebst Arbeit mit Holz und hast eine Zimmermann-Lehrstelle sicher (nach Jahren CHF 5\'400/Mt). Aber deine Eltern haben 20+ Jahre geschuftet als Küchenhilfe und Reinigungskraft: "Wir haben alles geopfert, damit DU Arzt oder Anwalt wirst." Das Gymnasium wäre extrem schwer für dich.',
+                    conflict: [
+                        'Zimmermann: Körperliche Arbeit die du liebst, gutes Gehalt',
+                        'Eltern sehen Handwerk als "das, was wir hinter uns lassen wollten"',
+                        'Identitätsspannung: Schweizer Werte vs. Familienerwartungen',
+                        'Opfernarrativ: "Wir haben unser Leben geopfert für dich"',
+                        'Gymnasium wäre Überforderung (Sekundarschule B)',
+                        'Du fühlst: "Ich enttäusche ihr ganzes Leben"'
+                    ]
+                },
+                options: [
+                    {
+                        id: 'family',
+                        title: '👨‍👩‍👧‍👦 Familie & Tradition',
+                        description: 'Ich versuche das Gymnasium. Ich schulde es meinen Eltern nach ihren Opfern, auch wenn es mich überfordert.'
+                    },
+                    {
+                        id: 'compromise',
+                        title: '⚖️ Kompromiss',
+                        description: 'Wirtschaftsgymnasium (4 Jahre, einfacher) + Studium Wirtschaft – für Familie akzeptabel, für mich tolerierbar.'
+                    },
+                    {
+                        id: 'career',
+                        title: '🎯 Karriere & Unabhängigkeit',
+                        description: 'Zimmermann-Lehre. Ich respektiere ihre Opfer, aber ich muss meinen eigenen Weg gehen, nicht ihren Traum leben.'
+                    },
+                    {
+                        id: 'delay',
+                        title: '⏰ Zeit für Entscheidung',
+                        description: 'Ich mache ein Praktikumsjahr in verschiedenen Bereichen, um Eltern zu zeigen, was mir wirklich liegt.'
+                    },
+                    {
+                        id: 'community',
+                        title: '🤝 Gemeinschaftslösung',
+                        description: 'Ich suche das Gespräch mit einem respektierten Community-Mitglied, das zwischen mir und meinen Eltern vermitteln kann.'
+                    }
+                ]
             }
         ];
 
-        // Decision Options
-        const options = [
-            {
-                id: 'family',
-                icon: '👨‍👩‍👧‍👦',
-                title: 'Familie & Tradition',
-                description: 'Du übernimmst das Familienrestaurant und bleibst in deiner Heimatstadt. Deine Familie kommt an erster Stelle, auch wenn du deine eigenen Träume zurückstellst.'
-            },
-            {
-                id: 'compromise',
-                icon: '⚖️',
-                title: 'Kompromiss',
-                description: 'Du suchst nach einem Mittelweg: Vielleicht kannst du das Jobangebot annehmen und gleichzeitig deine Familie unterstützen (z.B. durch regelmäßige Besuche, finanzielle Hilfe, oder Managementberatung für das Restaurant).'
-            },
-            {
-                id: 'career',
-                icon: '🎯',
-                title: 'Karriere & Unabhängigkeit',
-                description: 'Du verfolgst deine eigenen Ziele und nimmst das Jobangebot an. Die Familie muss eine andere Lösung finden. Du glaubst, dass du langfristig mehr für alle beitragen kannst, wenn du deine Ziele verfolgst.'
-            },
-            {
-                id: 'delay',
-                icon: '⏰',
-                title: 'Zeit für Entscheidung',
-                description: 'Du bittest um Bedenkzeit und versuchst, mehr Informationen zu sammeln. Vielleicht gibt es Alternativen, die du noch nicht gesehen hast, oder die Situation verändert sich.'
-            },
-            {
-                id: 'community',
-                icon: '🤝',
-                title: 'Gemeinschaftslösung',
-                description: 'Du suchst nach einer kollektiven Lösung: Familie, Freunde und Community könnten gemeinsam das Restaurant führen, während du deine Karriere verfolgst. Du organisierst ein Unterstützungsnetzwerk.'
-            }
-        ];
-
-        // Ethical Frameworks Content
-        const frameworks = {
-            utilitarismus: {
-                title: 'Utilitarismus',
-                icon: '⚖️',
-                content: `
-                    <h4>Kernprinzip:</h4>
-                    <p>Utilitarismus fragt: "Welche Handlung produziert das größte Gut für die größte Anzahl von Menschen?"</p>
-                    
-                    <h4>Anwendung auf deine Situation:</h4>
-                    <p>Ein Utilitarist würde berechnen: Wer profitiert am meisten von deiner Entscheidung?</p>
-                    <ul>
-                        <li><strong>Familie übernehmen:</strong> Kurzfristiges Glück der Familie, aber dein langfristiges Leiden?</li>
-                        <li><strong>Karriere wählen:</strong> Dein langfristiges Glück, aber kurzfristiges Leiden der Familie?</li>
-                        <li><strong>Kompromiss:</strong> Vielleicht maximiert dies das Gesamtwohl für alle Beteiligten?</li>
-                    </ul>
-                    
-                    <h4>Stärken:</h4>
-                    <p>Berücksichtigt alle Betroffenen, fokussiert auf echte Konsequenzen, nicht auf abstrakte Regeln.</p>
-                    
-                    <h4>Kritik:</h4>
-                    <p>Schwer zu berechnen, reduziert komplexe Beziehungen auf "Nutzen", ignoriert möglicherweise Rechte und Pflichten.</p>
-                `
-            },
-            kant: {
-                title: 'Deontologie (Kant)',
-                icon: '📜',
-                content: `
-                    <h4>Kernprinzip:</h4>
-                    <p>Kant fragt: "Kann ich wollen, dass meine Handlung ein universelles Gesetz wird?" Moralität basiert auf Pflichten, nicht auf Konsequenzen.</p>
-                    
-                    <h4>Relevante Pflichten:</h4>
-                    <ul>
-                        <li><strong>Pflicht zur Familie:</strong> Dankbarkeit, Fürsorge für kranken Vater</li>
-                        <li><strong>Pflicht zu dir selbst:</strong> Authentisch leben, deine Talente entwickeln</li>
-                        <li><strong>Universalisierbarkeit:</strong> Was, wenn jeder seine Familie für Karriere aufgäbe? Gesellschaft würde zusammenbrechen. Was, wenn jeder seine Träume für Familie opferte? Innovation würde stocken.</li>
-                    </ul>
-                    
-                    <h4>Kant würde sagen:</h4>
-                    <p>Finde eine Lösung, die beide Pflichten respektiert. Behandle weder deine Familie noch dich selbst als bloße Mittel zum Zweck.</p>
-                    
-                    <h4>Stärken:</h4>
-                    <p>Respektiert Würde aller Personen, bietet klare moralische Orientierung.</p>
-                    
-                    <h4>Kritik:</h4>
-                    <p>Zu abstrakt, hilft nicht bei Pflichtenkonflikten, kulturell spezifisch (westlich).</p>
-                `
-            },
-            tugend: {
-                title: 'Tugendethik',
-                icon: '🎯',
-                content: `
-                    <h4>Kernprinzip:</h4>
-                    <p>Tugendethik fragt: "Was für eine Person willst du sein? Was würde eine tugendhafte Person in dieser Situation tun?"</p>
-                    
-                    <h4>Relevante Tugenden:</h4>
-                    <ul>
-                        <li><strong>Pietät:</strong> Respekt und Fürsorge für Eltern</li>
-                        <li><strong>Mut:</strong> Zu deinen Überzeugungen stehen</li>
-                        <li><strong>Weisheit:</strong> Die richtige Balance finden</li>
-                        <li><strong>Authentizität:</strong> Deinem wahren Selbst treu bleiben</li>
-                        <li><strong>Großzügigkeit:</strong> Bereit sein zu geben, wenn nötig</li>
-                    </ul>
-                    
-                    <h4>Der tugendhafte Weg:</h4>
-                    <p>Eine tugendhafte Person sucht die "goldene Mitte" zwischen Extremen. Nicht rücksichtsloser Egoismus (nur Karriere), nicht selbstverleugnende Opferung (nur Familie), sondern ein weiser, mutiger Kompromiss, der beiden Werten gerecht wird.</p>
-                    
-                    <h4>Stärken:</h4>
-                    <p>Holistisch, schätzt Charakterentwicklung, kulturell resonant.</p>
-                    
-                    <h4>Kritik:</h4>
-                    <p>Manchmal vage, was ist die "richtige" Tugend in dieser Situation?</p>
-                `
-            },
-            kommunitarismus: {
-                title: 'Kommunitarismus',
-                icon: '🤝',
-                content: `
-                    <h4>Kernprinzip:</h4>
-                    <p>Kommunitarismus betont: Wir sind keine isolierten Individuen, sondern fundamental eingebettet in Gemeinschaften, Traditionen und Beziehungen, die uns prägen.</p>
-                    
-                    <h4>Deine Identität ist:</h4>
-                    <ul>
-                        <li><strong>Konstitutiv:</strong> Geprägt durch Familie, kulturelle Traditionen, Gemeinschaft</li>
-                        <li><strong>Relational:</strong> Du bist Sohn/Tochter, Geschwister, Gemeinschaftsmitglied</li>
-                        <li><strong>Traditionsgebunden:</strong> Werte und Praktiken wurden dir übergeben</li>
-                    </ul>
-                    
-                    <h4>Kommunitaristische Frage:</h4>
-                    <p>"Was sagen mir die Traditionen und geteilten Werte meiner Gemeinschaft über die richtige Handlung?"</p>
-                    
-                    <p>Eine kommunitaristische Lösung würde Dialog suchen: Familie, erweiterte Verwandtschaft, Community zusammenbringen. Entscheidungen sollten gemeinsam getroffen werden, nicht individualistisch.</p>
-                    
-                    <h4>Stärken:</h4>
-                    <p>Ehrt kulturelle Identität, schätzt Gemeinschaft, kritisiert westlichen Individualismus.</p>
-                    
-                    <h4>Kritik:</h4>
-                    <p>Kann unterdrückend sein, kann nötige Veränderung blockieren, wer definiert "Gemeinschaftswerte"?</p>
-                `
-            }
-        };
+        // State
+        let currentStep = 0;
+        let selectedPersona = null;
+        let selectedDecision = null;
+        let frameworksClicked = new Set();
+        let startTime = Date.now();
 
         // Initialize
-        function init() {
-            // Select random persona
-            appState.persona = personas[Math.floor(Math.random() * personas.length)];
+        window.onload = function() {
+            selectedPersona = personas[Math.floor(Math.random() * personas.length)];
+            updateProgress();
+        };
+
+        // Navigation
+        window.nextStep = function() {
+            const steps = document.querySelectorAll('.step');
+            steps[currentStep].classList.remove('active');
+            currentStep++;
+            steps[currentStep].classList.add('active');
+            updateProgress();
             
-            // Display persona
-            displayPersona();
+            if (currentStep === 1) {
+                displayPersona();
+            } else if (currentStep === 2) {
+                displayDilemma();
+            } else if (currentStep === 3) {
+                displayDecisionOptions();
+            }
             
-            // Display dilemma
-            displayDilemma();
-            
-            // Display options
-            displayOptions();
-            
-            // Start timer
-            startTimer();
+            window.scrollTo(0, 0);
+        };
+
+        window.prevStep = function() {
+            const steps = document.querySelectorAll('.step');
+            steps[currentStep].classList.remove('active');
+            currentStep--;
+            steps[currentStep].classList.add('active');
+            updateProgress();
+            window.scrollTo(0, 0);
+        };
+
+        function updateProgress() {
+            const progress = ((currentStep) / 4) * 100;
+            document.getElementById('progress').style.width = progress + '%';
         }
 
         function displayPersona() {
-            document.getElementById('persona-avatar').textContent = appState.persona.avatar;
-            document.getElementById('persona-name').textContent = appState.persona.name;
-            document.getElementById('persona-profession').textContent = appState.persona.profession;
-
-            const detailsContainer = document.getElementById('persona-details');
-            detailsContainer.innerHTML = `
-                <div class="detail-item">
-                    <div class="detail-label">Alter & Geschlecht</div>
-                    <div class="detail-value">${appState.persona.age} Jahre, ${appState.persona.gender}</div>
+            const card = document.getElementById('persona-card');
+            const p = selectedPersona;
+            
+            let detailsHtml = '';
+            for (const [key, value] of Object.entries(p.details)) {
+                detailsHtml += `
+                    <div class="detail-item">
+                        <span class="detail-label">${key}:</span>
+                        <span class="detail-value">${value}</span>
+                    </div>
+                `;
+            }
+            
+            card.innerHTML = `
+                <div class="persona-header">
+                    <div class="persona-avatar">${p.emoji}</div>
+                    <div class="persona-info">
+                        <h3>${p.name}, ${p.age} Jahre</h3>
+                        <p><strong>${p.background}</strong> • ${p.location}</p>
+                    </div>
                 </div>
-                <div class="detail-item">
-                    <div class="detail-label">Hintergrund</div>
-                    <div class="detail-value">${appState.persona.background}</div>
-                </div>
-                <div class="detail-item">
-                    <div class="detail-label">Ausbildung</div>
-                    <div class="detail-value">${appState.persona.education}</div>
-                </div>
-                <div class="detail-item">
-                    <div class="detail-label">Jobangebot</div>
-                    <div class="detail-value">${appState.persona.jobOffer}</div>
-                </div>
-                <div class="detail-item">
-                    <div class="detail-label">Familie</div>
-                    <div class="detail-value">${appState.persona.family}</div>
-                </div>
-                <div class="detail-item">
-                    <div class="detail-label">Persönlichkeit</div>
-                    <div class="detail-value">${appState.persona.personality}</div>
-                </div>
-                <div class="detail-item">
-                    <div class="detail-label">Traum</div>
-                    <div class="detail-value">${appState.persona.dream}</div>
+                <div class="persona-details">
+                    ${detailsHtml}
                 </div>
             `;
         }
 
         function displayDilemma() {
-            const dilemmaText = document.getElementById('dilemma-text');
-            dilemmaText.innerHTML = `
-                <p>Du hast gerade dein Studium abgeschlossen und ein <strong>Traumjobangebot</strong> erhalten: ${appState.persona.jobOffer}. Das ist genau das, wovon du immer geträumt hast!</p>
-                
-                <p style="margin-top: 15px;">Aber dann ruft dich deine Mutter an. Dein <strong>Vater ist krank</strong> geworden und kann das Familienrestaurant nicht mehr weiterführen. Seit drei Generationen ist das Restaurant der Stolz eurer Familie - ein Ort, wo eure Community zusammenkommt, wo Traditionen gelebt werden.</p>
-                
-                <p style="margin-top: 15px;">Deine Mutter fragt dich direkt: <em>"Kannst du nach Hause kommen und das Restaurant übernehmen? Die Familie braucht dich."</em></p>
-                
-                <p style="margin-top: 15px;">Du stehst vor einer <strong>Zerreißprobe</strong>:</p>
-                <ul style="margin-left: 25px; margin-top: 10px; line-height: 1.8;">
-                    <li>Deine <strong>eigenen Träume</strong> und die Chance, dich beruflich zu verwirklichen</li>
-                    <li>Die <strong>Erwartungen deiner Familie</strong> und die kulturelle Tradition</li>
-                    <li>Die <strong>finanzielle Sicherheit</strong> deiner Familie</li>
-                    <li>Deine <strong>persönliche Freiheit</strong> und Unabhängigkeit</li>
-                </ul>
+            const box = document.getElementById('dilemma-box');
+            const d = selectedPersona.dilemma;
+            
+            let conflictHtml = '';
+            d.conflict.forEach(item => {
+                conflictHtml += `<li>${item}</li>`;
+            });
+            
+            box.innerHTML = `
+                <div class="dilemma-title">${d.title}</div>
+                <div class="dilemma-text">${d.situation}</div>
+                <div class="conflict-list">
+                    <h4>💥 Das Spannungsfeld:</h4>
+                    <ul>${conflictHtml}</ul>
+                </div>
             `;
         }
 
-        function displayOptions() {
-            const container = document.getElementById('options-container');
-            options.forEach(option => {
+        function displayDecisionOptions() {
+            const container = document.getElementById('decision-options');
+            container.innerHTML = '';
+            
+            selectedPersona.options.forEach((option, index) => {
                 const card = document.createElement('div');
                 card.className = 'option-card';
-                card.onclick = () => selectOption(option.id);
-                card.setAttribute('data-option-id', option.id);
+                card.onclick = () => selectOption(option.id, card);
                 
                 card.innerHTML = `
-                    <div class="option-header">
-                        <div class="option-icon">${option.icon}</div>
-                        <div class="option-title">${option.title}</div>
-                    </div>
+                    <div class="option-number">${index + 1}</div>
+                    <div class="option-title">${option.title}</div>
                     <div class="option-description">${option.description}</div>
                 `;
                 
@@ -710,109 +1206,104 @@
             });
         }
 
-        function selectOption(optionId) {
-            // Remove previous selection
+        function selectOption(optionId, cardElement) {
             document.querySelectorAll('.option-card').forEach(card => {
                 card.classList.remove('selected');
             });
-            
-            // Add selection
-            document.querySelector(`[data-option-id="${optionId}"]`).classList.add('selected');
-            
-            // Update state
-            appState.selectedOption = optionId;
-            
-            // Enable submit button
+            cardElement.classList.add('selected');
+            selectedDecision = optionId;
             document.getElementById('submit-btn').disabled = false;
         }
 
-        function startTimer() {
-            appState.timerInterval = setInterval(() => {
-                const elapsed = Math.floor((Date.now() - appState.startTime) / 1000);
-                const minutes = Math.floor(elapsed / 60);
-                const seconds = elapsed % 60;
-                document.getElementById('timer').textContent = 
-                    `${minutes}:${seconds.toString().padStart(2, '0')}`;
-            }, 1000);
-        }
-
-        window.showFramework = function(frameworkId) {
-            const framework = frameworks[frameworkId];
-            const modal = document.getElementById('framework-modal');
-            const modalBody = document.getElementById('modal-body');
-            
-            // Track click
-            if (!appState.frameworksClicked.includes(frameworkId)) {
-                appState.frameworksClicked.push(frameworkId);
-            }
+        window.showFramework = function(framework) {
+            frameworksClicked.add(framework);
+            document.getElementById(`modal-${framework}`).classList.add('active');
             
             // Mark button as clicked
-            document.querySelectorAll('.framework-btn').forEach(btn => {
-                if (btn.textContent.includes(framework.title)) {
-                    btn.classList.add('clicked');
-                }
-            });
-            
-            modalBody.innerHTML = `
-                <h3>${framework.icon} ${framework.title}</h3>
-                <div class="modal-text">${framework.content}</div>
-            `;
-            
-            modal.style.display = 'block';
+            event.target.classList.add('clicked');
         };
 
-        window.closeModal = function() {
-            document.getElementById('framework-modal').style.display = 'none';
-        };
-
-        window.submitDecision = async function() {
-            if (!appState.selectedOption) return;
-            
-            const timeSpent = Math.floor((Date.now() - appState.startTime) / 1000);
-            
-            // Stop timer
-            clearInterval(appState.timerInterval);
-            
-            // Prepare data
-            const decisionData = {
-                username: appState.user.username,
-                persona: appState.persona.name,
-                personaId: appState.persona.id,
-                decision: appState.selectedOption,
-                timeSpent: timeSpent,
-                frameworksClicked: appState.frameworksClicked,
-                timestamp: new Date().toISOString(),
-                dilemmaId: 'migration'
-            };
-            
-            // Save to Firebase
-            try {
-                await addDoc(collection(db, 'decisions'), decisionData);
-                console.log('✅ Decision saved');
-                
-                // Mark as completed
-                await markDilemmaCompleted('migration');
-                
-                // Redirect to dashboard
-                alert('✅ Deine Entscheidung wurde gespeichert!\n\nZeit: ' + Math.floor(timeSpent / 60) + ' Minuten ' + (timeSpent % 60) + ' Sekunden\nFrameworks angeschaut: ' + appState.frameworksClicked.length);
-                window.location.href = 'dashboard.html';
-                
-            } catch (error) {
-                console.error('❌ Error saving decision:', error);
-                alert('Fehler beim Speichern. Bitte versuche es erneut.');
-            }
+        window.closeModal = function(framework) {
+            document.getElementById(`modal-${framework}`).classList.remove('active');
         };
 
         // Close modal on outside click
         window.onclick = function(event) {
-            const modal = document.getElementById('framework-modal');
-            if (event.target === modal) {
-                closeModal();
+            if (event.target.classList.contains('modal')) {
+                event.target.classList.remove('active');
             }
         };
 
-        // Initialize app
-        init();
+        window.submitDecision = async function() {
+            const btn = document.getElementById('submit-btn');
+            btn.disabled = true;
+            btn.textContent = 'Speichere...';
+            
+            const timeSpent = Math.round((Date.now() - startTime) / 1000);
+            
+            const decisionData = {
+                username: user.username,
+                dilemmaId: 'migration',
+                persona: selectedPersona.id,
+                decision: selectedDecision,
+                timeSpent: timeSpent,
+                frameworksClicked: Array.from(frameworksClicked),
+                timestamp: new Date().toISOString()
+            };
+            
+            try {
+                if (db) {
+                    await addDoc(collection(db, 'decisions'), decisionData);
+                    console.log('✅ Decision saved:', decisionData);
+                }
+                
+                await markDilemmaCompleted('migration');
+                
+                displayResult(timeSpent);
+                nextStep();
+                
+            } catch (error) {
+                console.error('❌ Error saving decision:', error);
+                alert('Fehler beim Speichern. Bitte versuche es erneut.');
+                btn.disabled = false;
+                btn.textContent = 'Entscheidung bestätigen';
+            }
+        };
+
+        function displayResult(timeSpent) {
+            const decisionLabels = {
+                'family': '👨‍👩‍👧‍👦 Familie & Tradition',
+                'compromise': '⚖️ Kompromiss',
+                'career': '🎯 Karriere & Unabhängigkeit',
+                'delay': '⏰ Zeit für Entscheidung',
+                'community': '🤝 Gemeinschaftslösung'
+            };
+            
+            const resultText = document.getElementById('result-text');
+            resultText.innerHTML = `
+                Du hast dich für <strong>${decisionLabels[selectedDecision]}</strong> entschieden.
+                <br><br>
+                Diese Wahl spiegelt deine Werte und Prioritäten wider. Es gibt keine objektiv "richtige" 
+                Antwort – jede Option hat ihre eigenen Konsequenzen, Vorteile und Herausforderungen.
+            `;
+            
+            const statsHtml = `
+                <div class="stat-item">
+                    <div class="stat-number">${Math.floor(timeSpent / 60)}:${(timeSpent % 60).toString().padStart(2, '0')}</div>
+                    <div class="stat-label">Entscheidungszeit</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">${frameworksClicked.size}</div>
+                    <div class="stat-label">Frameworks gelesen</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">${selectedPersona.name}</div>
+                    <div class="stat-label">Deine Persona</div>
+                </div>
+            `;
+            
+            document.getElementById('result-stats').innerHTML = statsHtml;
+        }
     </script>
 </body>
 </html>
